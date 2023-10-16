@@ -1,9 +1,9 @@
 TechEd Watch-and-code CodeJam
 
-# SAP BTP Trial Account Setup
+# SAP BTP Trial Account Setup - Murali
 ## Steps to create BTP Trial Account
 
-# SAP BTP Development Environment Setup
+# SAP BTP Development Environment Setup - Jorg
 ## Option 1: SAP Business Application Studio
 Steps to setup Business Appliation Studio 
 Check if OpenSAP steps can be used.
@@ -12,25 +12,27 @@ Check if OpenSAP steps can be used.
 
 ### Windows Version
 
-# SAP CodeJam Exercise
+# SAP CodeJam Exercise - Shaun / Jorg
+Based on: https://github.com/SAP-samples/cap-service-integration-codejam/tree/main/exercises/12-extend-fiori-ui-with-annotations![image](https://github.com/dielomawsome/TechEd/assets/124110484/ebf68800-9586-4401-836f-6f5d09ea929f)
+
 ## Pre-built content / git repository
 
 ## Steps to follow
 
-# AWS Account Setup
+# AWS Account Setup - Derek
 ## Provision AWS Account using Workshop Studio 
 
 # AWS CodeJam Exercise
-## Part 1 - Attach a document 
-### Create S3 Bucket
+## Part 1 - Attach a document
+### Create S3 Bucket - Diego
 
-### Setup IAM Role
+### Setup IAM Role - Diego
 
-### Create API in API Gateway 
+### Create API in API Gateway - Diego
 1. Put
 2. Get
 
-### SAP BTP App Modifications
+### SAP BTP App Modifications - Shaun / Jorg
 1. Add button to add attachment
 Is a popup screen needed?
 Add a field on the DB to store attachment details so it can be retrieved. 
@@ -39,11 +41,11 @@ Add a field on the DB to store attachment details so it can be retrieved.
 5. Call API Get
 
 ## Step 2 - Find a solution using Amazon Bedrock
-### API Details
+### API Details - Diego
 Check Google API call's limit
 Do we need Google?
-### Add button in SAP BTP App to call API
-### Display results in SAP BTP App
+### Add button in SAP BTP App to call API - Shaun / Jorg
+### Display results in SAP BTP App - Shaun / Jorg
 
-## Optional Step 3 - Add a notification when a file is attached
+## Optional Step 3 - Add a notification when a file is attached - Diego
 This might be too much. 
