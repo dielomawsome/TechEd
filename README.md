@@ -26,6 +26,9 @@ Based on: https://github.com/SAP-samples/cap-service-integration-codejam/tree/ma
 ## Part 1 - Attach a document
 ### Create S3 Bucket - Diego
 
+ ![image](https://github.com/dielomawsome/TechEd/assets/124110484/a9484d31-b5ef-420f-ba60-ae358c80ac0e)
+
+
 ### Setup IAM Role - Diego
 
 ### Create API in API Gateway - Diego
