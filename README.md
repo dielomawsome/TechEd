@@ -29,7 +29,6 @@ Based on: https://github.com/SAP-samples/cap-service-integration-codejam/tree/ma
 ![Alt text](image.png)
 
 
-
 ### Setup IAM Role - Diego
 
 ### Create API in API Gateway - Diego
