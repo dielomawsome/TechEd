@@ -70,6 +70,7 @@ Clicking on the button to the left of the name will copy the ARN.
 
 That's the S3 bucket created. 
 </details>
+
 ### Setup IAM Role
 <details>
 1. Access IAM console
@@ -181,6 +182,7 @@ Copy the ARN. You can click on the button on the left to do so.
 
 ![Alt text](image-23.png)
 </details>
+
 ### Create API in API Gateway
 <details>
 The next step is to create an API to access the S3 bucket. 
@@ -196,6 +198,7 @@ Search for API Gateway and click on the service on the menu
 1. Put
 2. Get
 </details>
+
 ### SAP BTP App Modifications - Shaun
 1. Add button to add attachment
 Is a popup screen needed?
