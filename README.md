@@ -31,6 +31,9 @@ In order to do this, you will create an S3 Bucket (Buckets are object containers
 
 ## Part 1 - Attach a document
 ### Create S3 Bucket
+
+The first step is to create an S3 bucket. There are a number of options available for S3 buckets, including cross region replication, versioning as well as events and notifications. For now you're going to go with a basic setup. 
+
 <details>
 1. Access S3 Console
 
@@ -72,6 +75,10 @@ That's the S3 bucket created.
 </details>
 
 ### Setup IAM Role
+
+Next you will need to create a policy to provide access to your S3 bucket and assign this to a Role that you will also create. You will use this role later on when creating the API. 
+
+
 <details>
 1. Access IAM console
 
@@ -184,16 +191,162 @@ Copy the ARN. You can click on the button on the left to do so.
 </details>
 
 ### Create API in API Gateway
-<details>
+
 The next step is to create an API to access the S3 bucket. 
 We will enable the option to save and read files from S3.
 This is done by implementing the PUT and GET methods.
+
+<details>
+
 
 1. Access API Gateway
 
 Search for API Gateway and click on the service on the menu
 
 ![Alt text](image-24.png)
+
+The API Gateway UI is going through a redesign. You're going to use the new console so click on the option at the top within the blue bar or the option on the left panel
+
+![Alt text](image-25.png)
+
+2.  Create REST API
+
+On the API Gateway screen, scroll down to REST API
+![Alt text](image-26.png)
+
+Click Build
+
+![Alt text](image-27.png)
+
+Select New API. Enter a name for your API. The endpoint type should be set to Regional. 
+Click on Create API
+![Alt text](image-28.png)
+
+
+3. Create Resources
+
+The resources will allow us to map the URL call to the S3 Bucket and the file. 
+Click on create resource
+
+![Alt text](image-29.png)
+
+The first resource will be called {folder}. This will be used in the API URL to indicate the bucket name. 
+Tick the CORS checkbox and click Create resource
+
+![Alt text](image-30.png)
+
+Create another resource (ensure you have {folder} selected which would be by default after creating it)
+
+![Alt text](image-31.png)
+
+This resource you're going to name it {item} and will represent the file name in the API call.
+Ensure that /{folder}/ is the preceding resource. 
+Tick the CORS checkbox and click Create resource
+
+![Alt text](image-32.png)
+
+
+4. Create GET Method
+
+Now you're going to create the GET method to read the files.
+Click on Create method. Emsure you've selected {item} on the resources path on the left. This would be the default after creating the resource
+
+![Alt text](image-33.png)
+
+
+On the next screen, first select GET as the method. This defines the GET method for the API we're creating.
+Then click on the AWS Service box. 
+Select the region us-east-1 and Simple Storage Service (S3) from the AWS Service from the respective dropdowns. 
+
+![Alt text](image-34.png)
+ 
+Scroll down and select the GET method. This select the GET Method from the S3 service. 
+Select the Use path override radio button as Action type.
+In the Path override field enter {bucket}/{object}. This will define the path to call the S3 API and will allow you to map the resources defined previously.
+In the execution role, enter the ARN for the role you created earlier. This allows the API to utilise the policies defined in the role when it is invoked. 
+Click on Create method
+
+![Alt text](image-35.png)
+
+The next step is to map the url parameters to the Bucket and Object parameters from our S3 bucket.
+With the GET method selected on the tree on the left, click on Integration request (any of the two highlighted options)
+
+ ![Alt text](image-36.png)
+
+Click Edit
+
+![Alt text](image-37.png)
+
+Scroll down
+
+![Alt text](image-38.png)
+
+Expand the URL path parameters and click add path parameter 
+
+![Alt text](image-39.png)
+
+Add the two parameters as per the mapping below. This maps the folder and item (file) from the URL to the S3 bucket and object names.
+
+    ```
+    Name: bucket - Mapped from: method.request.path.folder 
+    Name: object – Mapped from: method.request.path.item
+    ```
+
+Click Save
+
+![Alt text](image-40.png)
+
+
+5. Create PUT Method
+
+Next you will create the PUT method. The steps are the same as with the GET method, with the exception of selecting PUT instead of GET.
+First click on {item} so you're on the right place and the Create method button will display on the right panel.
+
+![Alt text](image-41.png)
+
+Click in Create method
+
+![Alt text](image-42.png)
+
+Select the PUT method.
+As before, select AWS Service, us-east-1 and Simple Storage Service (S3)
+
+![Alt text](image-43.png)
+
+Scroll down and select the PUT method. 
+Select Use path override, enter {bucket}/{object} and the ARN from your role.
+Click Create method once you're done.
+
+![Alt text](image-44.png)
+
+Next select Integration request from any of the two options.
+
+![Alt text](image-45.png)
+
+Click Edit
+
+![Alt text](image-46.png)
+
+
+Scroll down
+
+![Alt text](image-47.png)
+
+Expand URL path paremeters and add the two parameters, same as with the GET Method. 
+
+
+![Alt text](image-48.png)
+
+ ```
+    Name: bucket - Mapped from: method.request.path.folder 
+    Name: object – Mapped from: method.request.path.item
+```
+
+Click Save
+
+![Alt text](image-49.png)
+
+
 
 1. Put
 2. Get
