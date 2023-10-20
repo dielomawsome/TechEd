@@ -95,6 +95,7 @@ Copy and paste the following policy in the Policy Editor.
 Replace the resource with the ARN you copied before, or just replace the <your_bucket> text with the name of your bucket (without <>). Ensure that the /* are included at the end of the ARN.
 This policy enables access to read and write objects from your S3 bucket as well as listing objects within the bucket. 
 
+'''
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -108,6 +109,7 @@ This policy enables access to read and write objects from your S3 bucket as well
             "Resource": "arn:aws:s3:::<your_bucket>/*"
         }
 }
+'''
 
 ![Alt text](image-11.png)
 
@@ -178,7 +180,18 @@ Copy the ARN. You can click on the button on the left to do so.
 
 ![Alt text](image-23.png)
 
-### Create API in API Gateway - Diego
+### Create API in API Gateway
+
+The next step is to create an API to access the S3 bucket. 
+We will enable the option to save and read files from S3.
+This is done by implementing the PUT and GET methods.
+
+1. Access API Gateway
+
+Search for API Gateway and click on the service on the menu
+
+![Alt text](image-24.png)
+
 1. Put
 2. Get
 
