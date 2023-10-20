@@ -22,9 +22,15 @@ Based on: https://github.com/SAP-samples/cap-service-integration-codejam/tree/ma
 # AWS Account Setup - Derek
 ## Provision AWS Account using Workshop Studio 
 
-# AWS CodeJam Exercise
+# AWS CodeJam 
+
+In this section of the CodeJam you're going to extend the application that you built this morning. 
+There are two separated parts for this session.
+First, you're going to add the ability to add an attachment to the records you create in the BTP Application. These attachments will be stored in Amazon Simple Storage Services (a.k.a. S3), which is a realiable and cost effective object store service. 
+In order to do this, you will create an S3 Bucket (Buckets are object containers), then you will create a Role to provide access to the S3 Bucket and finally an API which will allow you to interact with the S3 bucket from the BTP Application. 
+
 ## Part 1 - Attach a document
-### Create S3 Bucket - Diego
+### Create S3 Bucket - 
 
 1. Access S3 Console
 
@@ -34,16 +40,35 @@ Enter S3 in the search bar and select S3 from the dropdown menu.
 2. Create bucket
 
 On the main S3 console, click on the Crate bucket button on the right
-![Alt text](images/image2.png)
+![Alt text](images/image-1.png)
 
 3. Enter bucket name
 
 Enter a bucket name. The bucket name needs to be unique across all AWS accounts. 
 A good idea would be to call it <your_name-teched-codejam>.
 
-![Alt text](images/image3.png)
+![Alt text](images/image-2.png)
 
+4. Scroll down and click on Create bucket
 
+![Alt text](image-3.png)
+
+5. Access the S3 bucket to retrieve the bucket resource name
+
+This will be required on a subsequent step, when we need to provide authorise our API to access to the S3 Bucket
+Click on the bucket name on the list
+![Alt text](image-4.png)
+
+6. Select Properties
+
+![Alt text](image-5.png)
+
+7. Copy the Amazone Resource Name (ARN)
+
+Clicking on the button to the left of the name will copy the ARN.
+![Alt text](image-6.png)
+
+That's the S3 bucket created. 
 
 ### Setup IAM Role - Diego
 
