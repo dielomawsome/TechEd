@@ -346,10 +346,54 @@ Click Save
 
 ![Alt text](image-49.png)
 
+6. Enable Binary media types
+
+By default, binary media types are not permitted. 
+In this case, you're going to enable PDF files. 
+Click on API Settings on the left panel
+
+![Alt text](image-50.png)
+
+Click on Manage media types
+
+![Alt text](image-51.png)
+
+Click on Add binary media type
+
+![Alt text](image-52.png)
+
+Enter application/pdf and click Save changes
+
+![Alt text](image-53.png)
 
 
-1. Put
-2. Get
+7. Deploy API
+
+Click on Resources on the left side panel
+
+![Alt text](image-54.png)
+
+Click on the Deploy API button
+
+![Alt text](image-55.png)
+
+Next you have to select a Stage. A stage allows you to have different versions of an API. This is commonly used to differentiate versions.
+
+![Alt text](image-56.png)
+
+Since it is the first time you're deploying, you have to create a stage. Select New Stage from the dropdown
+
+![Alt text](image-57.png)
+
+Enter a name (i.e.: v1). This will be used in the API URL.
+Click on Deploy.
+
+![Alt text](image-58.png)
+
+The API is now ready to be used. You can see the URL in the Invoke URL field
+
+![Alt text](image-59.png)
+
 </details>
 
 ### SAP BTP App Modifications - Shaun
@@ -361,11 +405,23 @@ Add a field on the DB to store attachment details so it can be retrieved.
 5. Call API Get
 
 ## Step 2 - Find a solution using Amazon Bedrock
-### API Details - Diego
-Check Google API call's limit
-Do we need Google?
+
+In the second step you're going to call a pre-defined API to find a solution for the incidents you create in your BTP application.
+The API provided below will receive a question (in the body of the call) and will first perform an internet search for a solution and provide a step by step set of instructions for you to solve your problem. This API leverages the Generative AI capability provided by Amazon Bedrock and the Anthropic Claude Foundation Model. 
+
+### API Details:
+
+https://w2n1b8qko7.execute-api.us-east-1.amazonaws.com/v1/fix
+
+### Body:
+
+{
+	"Question" : "<TITLE OF THE INCIDENT FROM BTP>"
+}
+
+
 ### Add button in SAP BTP App to call API - Shaun
+
+
 ### Display results in SAP BTP App - Shaun
 
-## Optional Step 3 - Add a notification when a file is attached - Diego
-This might be too much. 
