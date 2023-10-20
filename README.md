@@ -30,7 +30,7 @@ First, you're going to add the ability to add an attachment to the records you c
 In order to do this, you will create an S3 Bucket (Buckets are object containers), then you will create a Role to provide access to the S3 Bucket and finally an API which will allow you to interact with the S3 bucket from the BTP Application. 
 
 ## Part 1 - Attach a document
-### Create S3 Bucket
+### Step 1 - Create S3 Bucket
 
 The first step is to create an S3 bucket. There are a number of options available for S3 buckets, including cross region replication, versioning as well as events and notifications. For now you're going to go with a basic setup. 
 
@@ -74,7 +74,7 @@ Clicking on the button to the left of the name will copy the ARN.
 That's the S3 bucket created. 
 </details>
 
-### Setup IAM Role
+### Step 2 - Setup IAM Role
 
 Next you will need to create a policy to provide access to your S3 bucket and assign this to a Role that you will also create. You will use this role later on when creating the API. 
 
@@ -190,7 +190,7 @@ Copy the ARN. You can click on the button on the left to do so.
 ![Alt text](image-23.png)
 </details>
 
-### Create API in API Gateway
+### Step 3 - Create API in API Gateway
 
 The next step is to create an API to access the S3 bucket. 
 We will enable the option to save and read files from S3.
@@ -404,7 +404,7 @@ Add a field on the DB to store attachment details so it can be retrieved.
 4. Add button to retrieve attachment
 5. Call API Get
 
-## Step 2 - Find a solution using Amazon Bedrock
+## Part 2 - Find a solution using Amazon Bedrock
 
 In the second step you're going to call a pre-defined API to find a solution for the incidents you create in your BTP application.
 The API provided below will receive a question (in the body of the call) and will first perform an internet search for a solution and provide a step by step set of instructions for you to solve your problem. This API leverages the Generative AI capability provided by Amazon Bedrock and the Anthropic Claude Foundation Model. 
