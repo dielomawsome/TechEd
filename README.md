@@ -26,7 +26,7 @@ Based on: https://github.com/SAP-samples/cap-service-integration-codejam/tree/ma
 ## Part 1 - Attach a document
 ### Create S3 Bucket - Diego
 
-
+![Alt text](image.png)
 
 
 
