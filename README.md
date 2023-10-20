@@ -26,7 +26,20 @@ Based on: https://github.com/SAP-samples/cap-service-integration-codejam/tree/ma
 ## Part 1 - Attach a document
 ### Create S3 Bucket - Diego
 
+1. Access S3 Console
+Enter S3 in the search bar and select S3 from the dropdown menu.
 ![Alt text](images/image.png)
+
+2. Create bucket
+On the main S3 console, click on the Crate bucket button on the right
+![Alt text](images/image2.png)
+
+3. Enter bucket name
+Enter a bucket name. The bucket name needs to be unique across all AWS accounts. 
+A good idea would be to call it <your_name-teched-codejam>.
+
+![Alt text](images/image3.png)
+
 
 
 ### Setup IAM Role - Diego
