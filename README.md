@@ -31,7 +31,7 @@ In order to do this, you will create an S3 Bucket (Buckets are object containers
 
 ## Part 1 - Attach a document
 ### Create S3 Bucket
-
+<details>
 1. Access S3 Console
 
 Enter S3 in the search bar and select S3 from the dropdown menu.
@@ -69,9 +69,9 @@ Clicking on the button to the left of the name will copy the ARN.
 ![Alt text](image-6.png)
 
 That's the S3 bucket created. 
-
+</details>
 ### Setup IAM Role
-
+<details>
 1. Access IAM console
 
 On the search bar, type IAM (Identity Access Management), and select IAM from the menu.
@@ -137,7 +137,7 @@ Click Create role
 
 On the next screen, select Custom trust policy. This will enable the role we're creating to be used by our API. The action sts:AssumeRole allows a service or instance to adopt a role while it is performing an action. The service "apigateway.amazonaws.com" specifies that we're allowing the API Gateway service to use this role. 
 Copy the following code and paste it on the Custom trust policy section
-
+```
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -151,6 +151,7 @@ Copy the following code and paste it on the Custom trust policy section
         }
     ]
 } 
+```
 
 ![Alt text](image-17.png)
 
@@ -179,9 +180,9 @@ This will be required for to create the API. Search for your role and click on t
 Copy the ARN. You can click on the button on the left to do so. 
 
 ![Alt text](image-23.png)
-
+</details>
 ### Create API in API Gateway
-
+<details>
 The next step is to create an API to access the S3 bucket. 
 We will enable the option to save and read files from S3.
 This is done by implementing the PUT and GET methods.
@@ -194,7 +195,7 @@ Search for API Gateway and click on the service on the menu
 
 1. Put
 2. Get
-
+</details>
 ### SAP BTP App Modifications - Shaun
 1. Add button to add attachment
 Is a popup screen needed?
