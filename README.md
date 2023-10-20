@@ -1,7 +1,9 @@
 TechEd Watch-and-code CodeJam
 
-# SAP BTP Trial Account Setup - Murali - Diego to pre-populate from OpenSAP & Murali to validate.
-## Steps to create BTP Trial Account
+# SAP BTP Trial Account Setup
+In order to participate in this CodeJam, you will need a BTP account.
+If you have an account already, you can use that.
+Alternatively you can setup a Trial account following these steps: https://developers.sap.com/tutorials/hcp-create-trial-account.html
 
 # SAP BTP Development Environment Setup - Jorg & Murali
 ## Option 1: SAP Business Application Studio
