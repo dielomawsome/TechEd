@@ -43,6 +43,22 @@ Based on: [The SAP CodeJam](https://github.com/SAP-samples/cap-service-integrati
 
 ## Steps to follow - Jorg
 
+1. Create an empty NodeJS application with `npm init`
+2. Initialise an empty CAP application with `cds init && npm install`
+3. Start your app in development mode with `cds watch`
+3. Add a schema file
+4. Add an entity for Incidents
+5. Add some mock data for your entity 
+6. Create a service cds file
+7. Create an IncidentsService and add a projection to your entity
+7. View your service and the metadata on your localhost
+8. Create your first annotation and enable draft functionality on your Incidents projection
+9. Add a *Composition* for comments and provide some sample data
+10. Add an *Association* for Incident type and provide some sample data
+11. Create a Fiori Elements application with the wizard of type List Report / Object Page
+12. Use the *Page map* to add some columns to the list report, and some fields to the object page
+13. Use the *Page map* to turn the Incident type field into a search help
+
 # AWS Account Setup
 ## Provision AWS Account using Workshop Studio 
 
