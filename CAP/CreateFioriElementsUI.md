@@ -4,8 +4,8 @@ This tutorial shows you how to create an SAP Fiori elements app on top of your p
 You will learn:
 - How to create an SAP Fiori elements app on top of your previously created CAP application
 - How to modify the UI with OData annotations
-- How to make header info editable
 - How to check the annotation files
+- How to add custom code to your application
 
 **You must have completed the previous tutorial before starting this one**
 
