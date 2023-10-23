@@ -7,9 +7,10 @@ entity Incidents : managed {
       title       : String(100);
       prio        : String(5);
       descr       : String;
-      mitigations : Composition of many Mitigations
+      mitigations : Composition of one Mitigations
                       on mitigations.IncidentID = ID;
       impact      : Integer;
+      criticality : Integer;
 }
 
 entity Mitigations : managed {

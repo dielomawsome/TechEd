@@ -8,7 +8,7 @@ You will learn
 The full code base of the CAP app can be found [here](./caprisks/) should you need to check or copy the code
 
 
-### Step 1 - Create and initialize the project
+## Step 1 - Create and initialize the project
 1. Open a command line window.
 
 2. Create a new directory for your application 
@@ -58,7 +58,7 @@ The screen now looks like this:
 
 The CAP server tells you that there is no model and no service definitions yet that it can serve. You add some in the next step.
 
-### Step 2 - Add files to the project
+## Step 2 - Add files to the project
 
 1. Create the database tables
 Create a new file in the ``db`` folder called ``schema.cds``
@@ -75,9 +75,10 @@ entity Incidents : managed {
       title       : String(100);
       prio        : String(5);
       descr       : String;
-      mitigations : Composition of many Mitigations
+      mitigations : Composition of one Mitigations
                       on mitigations.IncidentID = ID;
       impact      : Integer;
+      criticality : Integer;
 }
 
 entity Mitigations : managed {
@@ -101,6 +102,7 @@ entity Employees {
       phone         : String                                @title: 'Phone Number'  @Communication.IsPhoneNumber;
       mitigations : Association to many Mitigations on mitigations.ownerEmployee = $self @title: 'Mitigations';
 };
+
 ```
 It creates three entities in the namespace ``sap.ui.riskmanagement``: ``Incidents``, ``Employees``  and ``Mitigations``. Each of them has a key called ```ID``` and several other properties. An ``Incident`` has one or more  ``Mitigations`` and, therefore, the property ``IncidentID`` has an association to exactly one ``Incident``. A ``Mitigation`` in turn can be used for one ``Incident``, so it has a “to one” association. The key is automatically filled by the CAP server, which is exposed to the user of the service with the annotation @(Core.Computed : true).
 

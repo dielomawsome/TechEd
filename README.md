@@ -50,7 +50,7 @@ Follow Tutorial 1 to [Create a CAP-Based Application](/CAP/CreateApplication.md)
 
 </details>
 
-Follow Tutorial 2 to Create a Fiori Elements Application
+Follow Tutorial 2 to [Create a Fiori Elements Application](/CAP/CreateFioriElementsUI.md)
 <details>
 
 1. Create a Fiori Elements application with the wizard of type List Report / Object Page
