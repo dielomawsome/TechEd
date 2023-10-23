@@ -21,8 +21,58 @@ Based on: https://github.com/SAP-samples/cap-service-integration-codejam/tree/ma
 
 ## Steps to follow - Jorg
 
-# AWS Account Setup - Derek
+# AWS Account Setup
 ## Provision AWS Account using Workshop Studio 
+
+1. Access this URL or scan the QR code below: 
+
+    **https://catalog.us-east-1.prod.workshops.aws/join?access-code=377a-0cdfa0-95** 
+
+    ![Alt text](image-60.png)
+
+2. Select Email one-time password (OTP)
+
+    ![Alt text](image-61.png)
+
+3. Provide an Email address that you have access to, then click on **Send passcode**.
+
+    You can use your corporate or personal email address. 
+
+    ![Alt text](image-62.png)
+
+
+4. Check your email for the passcode. 
+
+
+    ![Alt text](image-63.png)
+
+
+5. Copy this 9-digit into the Passcode field, then click on **Sign in**. 
+
+    ![Alt text](image-64.png)
+
+    ![Alt text](image-65.png)
+
+6. You will be prompted to Review and join the event. 
+
+    ![Alt text](image-66.png)
+
+7. Scroll down to review all the Terms and conditions, then check the box for **I agree with the Terms and Conditions**, and click on **Join event**.
+
+    ![Alt text](image-67.png)
+
+
+8. Now you'll be in your Event dashboard, which will look similar to the screenshot below. 
+
+    For this CodeJam, you can ignore the top section of the menu on the left and the main content of the workshop. You have to click on the **Open AWS Console** link, as highlighted in RED below. 
+    
+    ![Alt text](image-68.png) 
+
+9. Once the link opens, you will be inside the AWS Console, where all services are available.
+
+    You're now ready to go!
+
+    ![Alt text](image-69.png)
 
 # AWS CodeJam 
 
