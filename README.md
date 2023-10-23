@@ -45,10 +45,10 @@ Follow Tutorial 1 to [Create a CAP-Based Application](/CAP/CreateApplication.md)
 9. Add a *Composition* for comments and provide some sample data
 10. Add an *Association* for Incident type and provide some sample data
 
-Follow Lesson 2 to Create a Fiori Elements Application
-11. Create a Fiori Elements application with the wizard of type List Report / Object Page
-12. Use the *Page map* to add some columns to the list report, and some fields to the object page
-13. Use the *Page map* to turn the Incident type field into a search help
+Follow Tutorial 2 to Create a Fiori Elements Application
+1. Create a Fiori Elements application with the wizard of type List Report / Object Page
+2. Use the *Page map* to add some columns to the list report, and some fields to the object page
+3. Use the *Page map* to turn the Incident type field into a search help
 
 # AWS Account Setup
 ## Provision AWS Account using Workshop Studio 

@@ -53,6 +53,7 @@ cds watch
 The CAP server serves all the CAP sources from your project. It also “watches” all the files in your projects and conveniently restarts whenever you save a file. Changes you have made will immediately be served without you having to do anything
 
 The screen now looks like this:
+
 <img src="../images/CDSWatchEmpty.png" width="500">
 
 The CAP server tells you that there is no model and no service definitions yet that it can serve. You add some in the next step.
