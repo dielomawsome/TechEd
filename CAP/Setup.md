@@ -61,18 +61,18 @@ Restart VS Code for the new $PATH value to take effect.
 Git is the version control system that you need to download the files of this tutorial but also to develop anything in collaboration with others really.
 
 Check whether you already have Git installed. Open a command line window and execute the following command.
-```
+```bash
 git version
 ```
 You should get an output like:
-```
+```bash
 git version 2.x.x
 ```
 If not, go to [Git downloads](https://git-scm.com/downloads), pick the installer appropriate for your operating system and install it.
 
 ### WSL2
 One last reminder. You should be following the Ubuntu install guide.  So you should be installing git via the terminal app in Ubuntu using the folling command
-```
+```bash
 apt-get install git
 ```
 
@@ -87,7 +87,7 @@ Choose the LTS version, via the left-hand side button
 ***Optionally*** you could install NVM first and then use this tool to manage install of your Node versions.
 
 In case you don’t know whether you have Node.js installed and whether it has the right version (^16), open a command line window and execute the following command:
-```
+```bash
 node -v
 ```
 
@@ -100,12 +100,12 @@ You can follow the installation guide [here](https://github.com/nvm-sh/nvm/blob/
 CAP provides you with all the tools to create your data model with entities and your services. It helps you tremendously to get these services running locally during development with an incredible speed. It also creates the connection to both local databases and databases in the cloud (SAP HANA). It comes with different tooling that is used in this tutorial.
 
 Run this in a terminal:
-```
+```bash
 npm add -g @sap/cds-dk
 ```
 
 To check if it's installed correctly. Run the following command 
-```
+```bash
 cds --version
 ```
 
