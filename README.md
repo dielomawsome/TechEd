@@ -23,18 +23,7 @@ To set up BAS on a BTP environment, the necessary steps can be found in [this ha
 
 ## Option 2: Local Visual Studio Code option
 
-Follow these instructions as required. To work with CAP locally, a few tools need to be installed. There is a handy guide on what to do available 
-in the [CAP Jumpstart in the official documentation](https://cap.cloud.sap/docs/get-started/jumpstart). Please note that for this exercise, you do *not* need to set up Java and Maven. 
-
-CAP development uses the command line. On MacOS, you'll use the built-in terminal. On Windows, Powershell can be used. To test, open your terminal of choice and type command
-
-```
-cds --version
-```
-
-The result should be something like 
-
-![terminal](./images/terminal1.png)
+Follow these instructions as required. To work with CAP locally, a few tools need to be installed. There is a handy [setup guide](/CAP/Setup.md) we wrote. 
 
 # SAP CodeJam Exercise
 Based on: [The SAP CodeJam](https://github.com/SAP-samples/cap-service-integration-codejam/tree/main/exercises/12-extend-fiori-ui-with-annotations)
