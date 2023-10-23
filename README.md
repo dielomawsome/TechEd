@@ -37,7 +37,7 @@ The result should be something like
 ![terminal](./images/terminal1.png)
 
 # SAP CodeJam Exercise
-Based on: [https://github.com/SAP-samples/cap-service-integration-codejam/tree/main/exercises/12-extend-fiori-ui-with-annotations](https://github.com/dielomawsome/TechEd/assets/124110484/ebf68800-9586-4401-836f-6f5d09ea929f)
+Based on: [https://github.com/SAP-samples/cap-service-integration-codejam/tree/main/exercises/12-extend-fiori-ui-with-(./images/images](https://github.com/dielomawsome/TechEd/assets/124110484/ebf68800-9586-4401-836f-6f5d09ea929f)
 
 ## Pre-built content / git repository - Jorg
 
