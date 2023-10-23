@@ -24,6 +24,8 @@ Based on: https://github.com/SAP-samples/cap-service-integration-codejam/tree/ma
 # AWS Account Setup
 ## Provision AWS Account using Workshop Studio 
 
+<details>
+
 1. Access this URL or scan the QR code below: 
 
     **https://catalog.us-east-1.prod.workshops.aws/join?access-code=377a-0cdfa0-95** 
@@ -73,6 +75,8 @@ Based on: https://github.com/SAP-samples/cap-service-integration-codejam/tree/ma
     You're now ready to go!
 
     ![Alt text](image-69.png)
+
+</details>
 
 # AWS CodeJam 
 
