@@ -1,0 +1,3 @@
+ID;IncidentID;createdAt;createdBy;description;ownerEmployee_Id;timeline
+20466922-7d57-4e76-b14c-e53fd97dcb11;20466922-7d57-4e76-b14c-e53fd97dcb11;2019-10-24;max.mustermann@muster.com;Isolate affected systems: Quarantine or disconnect compromised systems from the network to prevent further unauthorized access.;jeff;Q2 2023
+20466922-7d57-4e76-b14c-e53fd97dcb12;20466922-7d57-4e76-b14c-e53fd97dcb12;2019-10-24;max.mustermann@muster.com;"Isolate the issue: If possible, isolate the affected server to prevent further disruption to other servers or services";linda;Q3 2023

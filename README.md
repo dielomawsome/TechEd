@@ -23,18 +23,7 @@ To set up BAS on a BTP environment, the necessary steps can be found in [this ha
 
 ## Option 2: Local Visual Studio Code option
 
-Follow these instructions as required. To work with CAP locally, a few tools need to be installed. There is a handy guide on what to do available 
-in the [CAP Jumpstart in the official documentation](https://cap.cloud.sap/docs/get-started/jumpstart). Please note that for this exercise, you do *not* need to set up Java and Maven. 
-
-CAP development uses the command line. On MacOS, you'll use the built-in terminal. On Windows, Powershell can be used. To test, open your terminal of choice and type command
-
-```
-cds --version
-```
-
-The result should be something like 
-
-![terminal](./images/terminal1.png)
+Follow these instructions as required. To work with CAP locally, a few tools need to be installed. There is a handy [setup guide](/CAP/Setup.md) we wrote. 
 
 # SAP CodeJam Exercise
 Based on: [The SAP CodeJam](https://github.com/SAP-samples/cap-service-integration-codejam/tree/main/exercises/12-extend-fiori-ui-with-annotations)
@@ -42,6 +31,9 @@ Based on: [The SAP CodeJam](https://github.com/SAP-samples/cap-service-integrati
 ## Pre-built content / git repository - Jorg
 
 ## Steps to follow - Jorg
+Follow Tutorial 1 to [Create a CAP-Based Application](/CAP/CreateApplication.md)
+
+<details>
 
 1. Create an empty NodeJS application with `npm init`
 2. Initialise an empty CAP application with `cds init && npm install`
@@ -55,9 +47,17 @@ Based on: [The SAP CodeJam](https://github.com/SAP-samples/cap-service-integrati
 8. Create your first annotation and enable draft functionality on your Incidents projection
 9. Add a *Composition* for comments and provide some sample data
 10. Add an *Association* for Incident type and provide some sample data
-11. Create a Fiori Elements application with the wizard of type List Report / Object Page
-12. Use the *Page map* to add some columns to the list report, and some fields to the object page
-13. Use the *Page map* to turn the Incident type field into a search help
+
+</details>
+
+Follow Tutorial 2 to [Create a Fiori Elements Application](/CAP/CreateFioriElementsUI.md)
+<details>
+
+1. Create a Fiori Elements application with the wizard of type List Report / Object Page
+2. Use the *Page map* to add some columns to the list report, and some fields to the object page
+3. Use the *Page map* to turn the Incident type field into a search help
+
+</details>
 
 # AWS Account Setup
 ## Provision AWS Account using Workshop Studio 

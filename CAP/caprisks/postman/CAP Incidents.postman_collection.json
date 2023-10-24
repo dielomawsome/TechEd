@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "662c8a3b-45e7-4404-9a79-f6909858f4f3",
+		"name": "CAP Incidents",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14599144"
+	},
+	"item": [
+		{
+			"name": "Get Incidents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4004/odata/v4/service/incident/Incidents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4004",
+					"path": [
+						"odata",
+						"v4",
+						"service",
+						"incident",
+						"Incidents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4004/odata/v4/service/incident/Employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4004",
+					"path": [
+						"odata",
+						"v4",
+						"service",
+						"incident",
+						"Employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Mitigations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4004/odata/v4/service/incident/Mitigations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4004",
+					"path": [
+						"odata",
+						"v4",
+						"service",
+						"incident",
+						"Mitigations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Mitigation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4004/odata/v4/service/incident/Mitigations(ID=20466922-7d57-4e76-b14c-e53fd97dcb11,IsActiveEntity=true)",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4004",
+					"path": [
+						"odata",
+						"v4",
+						"service",
+						"incident",
+						"Mitigations(ID=20466922-7d57-4e76-b14c-e53fd97dcb11,IsActiveEntity=true)"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4004/odata/v4/service/incident/Employees('jeff')",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4004",
+					"path": [
+						"odata",
+						"v4",
+						"service",
+						"incident",
+						"Employees('jeff')"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee Mitigations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4004/odata/v4/service/incident/Employees('jeff')/mitigations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4004",
+					"path": [
+						"odata",
+						"v4",
+						"service",
+						"incident",
+						"Employees('jeff')",
+						"mitigations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Incident",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4004/odata/v4/service/incident/Incidents(20466922-7d57-4e76-b14c-e53fd97dcb11)",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4004",
+					"path": [
+						"odata",
+						"v4",
+						"service",
+						"incident",
+						"Incidents(20466922-7d57-4e76-b14c-e53fd97dcb11)"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
