@@ -68,45 +68,57 @@ Copy the code here and paste it into the file.
 ```js
 namespace sap.ui.riskmanagement;
 
-using {managed} from '@sap/cds/common';
+using {
+  managed,
+  cuid
+} from '@sap/cds/common';
 
-entity Incidents : managed {
-  key ID          : UUID @(Core.Computed: true);
-      title       : String(100);
-      prio        : String(5);
-      descr       : String;
-      mitigations : Composition of one Mitigations
-                      on mitigations.IncidentID = ID;
-      impact      : Integer;
-      criticality : Integer;
+entity Incidents : cuid, managed {
+  title       : String(100);
+  prio        : String(5);
+  descr       : String;
+  mitigations : Composition of many Mitigations
+                  on mitigations.incident = $self;
+  impact      : Integer;
+  criticality : Integer;
+  employee    : Association to Employees;
 }
 
-entity Mitigations : managed {
-  key ID            : UUID @(Core.Computed: true);
-      IncidentID    : UUID;
-      description   : String;
-      ownerEmployee : Association to Employees;
-      timeline      : String;
-      incidents     : Association to one Incidents
-                        on incidents.ID = IncidentID;
+entity Mitigations : cuid, managed {
+  description : String;
+  timeline    : String;
+  incident    : Association to one Incidents;
 }
 
 entity Employees {
-  key ID            : String                                @title: 'ID'            @Common: {
+  key ID        : String  @title: 'ID'            @Common: {
         SemanticObject : 'employee',
         Text           : name,
         TextArrangement: #TextOnly
       };
-      name          : String                                @title: 'Name';
-      email         : String                                @title: 'e-mail'        @Communication.IsEmailAddress;
-      phone         : String                                @title: 'Phone Number'  @Communication.IsPhoneNumber;
-      mitigations : Association to many Mitigations on mitigations.ownerEmployee = $self @title: 'Mitigations';
+      name      : String  @title: 'Name';
+      email     : String  @title: 'e-mail'        @Communication.IsEmailAddress;
+      phone     : String  @title: 'Phone Number'  @Communication.IsPhoneNumber;
+      incidents : Association to many Incidents
+                    on incidents.employee = $self;
 };
+```
+It creates three entities in the namespace ``sap.ui.riskmanagement``: ``Incidents``, ``Employees``  and ``Mitigations``. 
+
+<img src="../images/DataModel.png" width="700">
+
+Each of them has a key called ```ID``` and several other properties. An ``Incident`` has one ``Mitigations`` and, therefore, the property ``IncidentID`` has an association to exactly one ``Incident``. A ``Mitigation`` in turn can be used for one ``Incident``, so it has a “to one” association. The key is automatically filled by the CAP server, which is exposed to the user of the service via the aspect [``cuid``](https://cap.cloud.sap/docs/cds/common#aspect-cuid).
+
+
+
+Notice how the CAP server reacted to dropping the file. It now tells you that it has a model but there are no service definitions yet and, thus, it still can’t serve anything. 
 
 ```
-It creates three entities in the namespace ``sap.ui.riskmanagement``: ``Incidents``, ``Employees``  and ``Mitigations``. Each of them has a key called ```ID``` and several other properties. An ``Incident`` has one or more  ``Mitigations`` and, therefore, the property ``IncidentID`` has an association to exactly one ``Incident``. A ``Mitigation`` in turn can be used for one ``Incident``, so it has a “to one” association. The key is automatically filled by the CAP server, which is exposed to the user of the service with the annotation @(Core.Computed : true).
+No service definitions found in loaded models.
+Waiting for some to arrive...
+```
 
-Notice how the CAP server reacted to dropping the file. It now tells you that it has a model but there are no service definitions yet and, thus, it still can’t serve anything. Next, you add a service definition.
+Next, you add a service definition.
 
 1. Create the OData V4 Service
 
@@ -117,9 +129,10 @@ Copy the code here and paste it into the file.
 using { sap.ui.riskmanagement as my } from '../db/schema';
 @path: 'service/incident'
 service IncidentsService {
+ 
+  @odata.draft.enabled
   entity Incidents as projection on my.Incidents;
   entity Mitigations as projection on my.Mitigations;
-    annotate Mitigations with @odata.draft.enabled;
   entity Employees as projection on my.Employees;
 }
 ```
@@ -149,16 +162,16 @@ So, there’s no data yet. This is because so far, your model doesn’t contain 
 You have now added three comma-separated value (CSV) files that contain local data for ``Incidents``, ``Mitigations`` and the ``Employees``  entities. A quick look into the ``sap.ui.riskmanagement-Incidents.csv`` (the name consists of your namespace and the name of your database entity from the schema.cds file) file shows data like this:
 
 ```csv
-ID;createdAt;createdBy;title;prio;descr;impact
-20466922-7d57-4e76-b14c-e53fd97dcb11;2023-10-24;max.mustermann@muster.com;Security Breach;3;Unauthorized access to customer data;10000
+ID;createdAt;createdBy;title;prio;descr;impact;employee_ID
+20466922-7d57-4e76-b14c-e53fd97dcb11;2023-10-24;max.mustermann@muster.com;Security Breach;3;Unauthorized access to customer data;10000;david
 ...
 ```
 
-The first line contains all the properties from your ``Mitigations`` entity. While the other ones are straight forward, consider the ``ownerEmployee_Id`` property. In your entity, you only have a ``ownerEmployee`` property, so where does it come from? ``ownerEmployee_Id`` is an association to ``Employees``, as ``Mitigations`` could have several key properties, the association on the database needs to point to all of these, therefore the CAP server creates a property ``<AssociationProperty>_<AssociatedEntityKey>`` for each key.
+The first line contains all the properties from your ``Incidents`` entity. While the other ones are straight forward, consider the ``employee_ID`` property. In your entity, you only have a ``employee`` property, so where does it come from? ``ownerEmployee_Id`` is an association to ``Employees``, as ``Incidents`` could have several key properties, the association on the database needs to point to all of these, therefore the CAP server creates a property ``<AssociationProperty>_<AssociatedEntityKey>`` for each key.
 
 To learn more about composition and associations, check out the [CAP help](https://cap.cloud.sap/docs/cds/cdl#associations)
 
-As always, the CAP server has noticed the changes, you've made.
+Once again, the CAP server has noticed the changes, you've made.
 
 1. Revisit the ``Incidents`` entity [http://localhost:4004/odata/v4/service/incident/Incidents](http://localhost:4004/odata/v4/service/incident/Incidents) in your browser. You now see the data exposed.
 

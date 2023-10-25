@@ -46,11 +46,21 @@ An SAP Fiori elements app is an application that leverages SAPUI5, SAPUI5 contro
 
 The application is now generated and in a few seconds you can see it in the ``app`` folder of your project. It contains a ``incidents`` and a ``webapp`` folder with a ``Component.js`` file that is characteristic for an SAPUI5 app.
 
-*However, the code there’s minimal and it basically inherits its logic from the ``sap/fe/core/AppComponent``. The ``sap/fe/core/AppComponent`` is the base class for SAP Fiori elements. This class is managed centrally by SAP Fiori elements, so you don’t need to modify it yourself.*
+*However, the code in the App is minimal and it basically inherits its logic from the ``sap/fe/core/AppComponent``. The ``sap/fe/core/AppComponent`` is the base class for SAP Fiori elements. This class is managed centrally by SAP Fiori elements, so you don’t need to modify it yourself.*
+
+
+View the page map by selecting  ``Open Page Map`` to see a view of the application pages.  
+
+<img src="../images/PageMap.png" width="500">
+
+**If you find the page map is not loading run the following command in the root directory of the web application (i.e. caprisks/app/incidents) to add this as a dev dependency for your project to work**
+```
+npm i @sap/ux-specification --save-dev
+```
 
 ## Step 2 - Modify the UI with OData annotations
 
-1. If it’s not still running from the previous tutorial, execute ``cds watch`` in a VS Code terminal and switch to [http://localhost:4004](http://localhost:4004) in your browser.
+1. If it is not still running from the previous tutorial, execute ``cds watch`` in a VS Code terminal and switch to [http://localhost:4004](http://localhost:4004) in your browser.
 
 You can now see that the CAP server has discovered an HTML page in your ``app`` folder:
 
@@ -82,13 +92,11 @@ annotate IncidentsService.Mitigations with {
         Common: {Text: description}
     );
     description   @title: 'Description';
-    ownerEmployee @title: 'Owner';
     timeline      @title: 'Timeline';
-    incidents     @title: 'Incidents';
 }
 
 annotate IncidentsService.Incidents with @(UI: {
-    HeaderInfo            : {
+    HeaderInfo             : {
         TypeName      : 'Incident',
         TypeNamePlural: 'Incidents',
         Title         : {
@@ -101,12 +109,12 @@ annotate IncidentsService.Incidents with @(UI: {
         },
         TypeImageUrl  : 'sap-icon://alert'
     },
-    SelectionFields       : [prio],
-    LineItem              : [
+    SelectionFields        : [prio],
+    LineItem               : [
         {Value: title},
         {Value: descr},
         {
-            Value : mitigations.description,
+            Value: mitigations.description,
             Label: 'Mitigation Description'
         },
         {
@@ -118,33 +126,53 @@ annotate IncidentsService.Incidents with @(UI: {
             Criticality: criticality
         }
     ],
-    Facets                : [
+    Facets                 : [
         {
             $Type : 'UI.ReferenceFacet',
             Label : 'Main',
-            Target: '@UI.FieldGroup#Main'
+            Target: '@UI.FieldGroup#Main',
         },
         {
             $Type : 'UI.ReferenceFacet',
-            Label : 'Mitigation',
-            Target: '@UI.FieldGroup#Mitigation'
-        }
+            Label : 'Mitigations',
+            ID    : 'Mitigations',
+            Target: 'mitigations/@UI.LineItem#Mitigations',
+        },
     ],
-    FieldGroup #Main      : {Data: [
+    FieldGroup #Main       : {Data: [
         {Value: prio, },
         {Value: impact, },
         {Value: descr, }
     ]},
 
-    FieldGroup #Mitigation: {Data: [
-        {Value: mitigations.ownerEmployee_ID},
-        {Value: mitigations.description},
-        {Value: mitigations.timeline}
-    ]}
 
-}, ) {
+    FieldGroup #Mitigation1: {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: mitigations.description,
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: mitigations.timeline,
+            },
+        ],
+    }
 
-};
+}, );
+
+annotate IncidentsService.Mitigations with @(UI.LineItem #Mitigations: [
+    {
+        $Type: 'UI.DataField',
+        Value: description,
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: timeline,
+    },
+]);
+
 
 ```
 

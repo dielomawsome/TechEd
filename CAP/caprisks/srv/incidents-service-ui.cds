@@ -13,13 +13,11 @@ annotate IncidentsService.Mitigations with {
         Common: {Text: description}
     );
     description   @title: 'Description';
-    ownerEmployee @title: 'Owner';
     timeline      @title: 'Timeline';
-    incidents     @title: 'Incidents';
 }
 
 annotate IncidentsService.Incidents with @(UI: {
-    HeaderInfo            : {
+    HeaderInfo             : {
         TypeName      : 'Incident',
         TypeNamePlural: 'Incidents',
         Title         : {
@@ -32,12 +30,12 @@ annotate IncidentsService.Incidents with @(UI: {
         },
         TypeImageUrl  : 'sap-icon://alert'
     },
-    SelectionFields       : [prio],
-    LineItem              : [
+    SelectionFields        : [prio],
+    LineItem               : [
         {Value: title},
         {Value: descr},
         {
-            Value : mitigations.description,
+            Value: mitigations.description,
             Label: 'Mitigation Description'
         },
         {
@@ -49,30 +47,49 @@ annotate IncidentsService.Incidents with @(UI: {
             Criticality: criticality
         }
     ],
-    Facets                : [
+    Facets                 : [
         {
             $Type : 'UI.ReferenceFacet',
             Label : 'Main',
-            Target: '@UI.FieldGroup#Main'
+            Target: '@UI.FieldGroup#Main',
         },
         {
             $Type : 'UI.ReferenceFacet',
-            Label : 'Mitigation',
-            Target: '@UI.FieldGroup#Mitigation'
-        }
+            Label : 'Mitigations',
+            ID    : 'Mitigations',
+            Target: 'mitigations/@UI.LineItem#Mitigations',
+        },
     ],
-    FieldGroup #Main      : {Data: [
+    FieldGroup #Main       : {Data: [
         {Value: prio, },
         {Value: impact, },
         {Value: descr, }
     ]},
 
-    FieldGroup #Mitigation: {Data: [
-        {Value: mitigations.ownerEmployee_ID},
-        {Value: mitigations.description},
-        {Value: mitigations.timeline}
-    ]}
 
-}, ) {
+    FieldGroup #Mitigation1: {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: mitigations.description,
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: mitigations.timeline,
+            },
+        ],
+    }
 
-};
+}, );
+
+annotate IncidentsService.Mitigations with @(UI.LineItem #Mitigations: [
+    {
+        $Type: 'UI.DataField',
+        Value: description,
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: timeline,
+    },
+]);
