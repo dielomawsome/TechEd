@@ -166,13 +166,11 @@ It now shows a work list with some columns and the data from the service.
 Copy the code below into the file you just created
 ```js
 
-const cds = require('@sap/cds')
-
 /**
  * Implementation for Risk Management service defined in ./risk-service.cds
  */
-module.exports = cds.service.impl(async function() {
-    this.after('READ', 'Incidents', risksData => {
+module.exports = async (srv) => {
+    srv.after('READ', 'Incidents', risksData => {
         const risks = Array.isArray(risksData) ? risksData : [risksData];
         risks.forEach(risk => {
             if (risk.impact >= 100000) {
@@ -182,7 +180,8 @@ module.exports = cds.service.impl(async function() {
             }
         });
     });
-});
+
+};
 ```
 
 In your browser, reload the page of the SAP Fiori elements app.
