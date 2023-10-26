@@ -2,7 +2,8 @@ namespace sap.ui.riskmanagement;
 
 using {
   managed,
-  cuid
+  cuid,
+  sap.common.CodeList
 } from '@sap/cds/common';
 
 entity Incidents : cuid, managed {
@@ -13,7 +14,7 @@ entity Incidents : cuid, managed {
                   on mitigations.incident = $self;
   impact      : Integer;
   criticality : Integer;
-  employee    : Association to Employees;
+  type: Association to Type;
 }
 
 entity Mitigations : cuid, managed {
@@ -22,15 +23,6 @@ entity Mitigations : cuid, managed {
   incident    : Association to one Incidents;
 }
 
-entity Employees {
-  key ID        : String  @title: 'ID'            @Common: {
-        SemanticObject : 'employee',
-        Text           : name,
-        TextArrangement: #TextOnly
-      };
-      name      : String  @title: 'Name';
-      email     : String  @title: 'e-mail'        @Communication.IsEmailAddress;
-      phone     : String  @title: 'Phone Number'  @Communication.IsPhoneNumber;
-      incidents : Association to many Incidents
-                    on incidents.employee = $self;
-};
+entity Type : CodeList {
+  key code: Integer;
+}

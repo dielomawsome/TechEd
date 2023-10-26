@@ -5,5 +5,5 @@ service IncidentsService {
   @odata.draft.enabled
   entity Incidents as projection on my.Incidents;
   entity Mitigations as projection on my.Mitigations;
-  entity Employees as projection on my.Employees;
+  // entity Employees as projection on my.Employees;
 }

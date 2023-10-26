@@ -1,5 +1,5 @@
-ID;createdAt;createdBy;title;prio;descr;impact;employee_ID
-20466922-7d57-4e76-b14c-e53fd97dcb11;2023-10-24;max.mustermann@muster.com;Security Breach;3;Unauthorized access to customer data;10000;david
-20466922-7d57-4e76-b14c-e53fd97dcb12;2023-10-24;max.mustermann@muster.com;Network Outage;2;Server outage affecting multiple services;90000;david
-20466922-7d57-4e76-b14c-e53fd97dcb13;2023-10-24;max.mustermann@muster.com;Network Outage;1;DDoS attack on network infrastructure;200000;david
-20466922-7d57-4e76-b14c-e53fd97dcb14;2023-10-24;max.mustermann@muster.com;Software Bug;1;Application crash on user login;200000;david
+ID;createdAt;createdBy;title;prio;descr;impact;type_code
+20466922-7d57-4e76-b14c-e53fd97dcb11;2023-10-24;max.mustermann@muster.com;Security Breach;3;Unauthorized access to customer data;10000;1
+20466922-7d57-4e76-b14c-e53fd97dcb12;2023-10-24;max.mustermann@muster.com;Network Outage;2;Server outage affecting multiple services;90000;1
+20466922-7d57-4e76-b14c-e53fd97dcb13;2023-10-24;max.mustermann@muster.com;Network Outage;1;DDoS attack on network infrastructure;200000;2
+20466922-7d57-4e76-b14c-e53fd97dcb14;2023-10-24;max.mustermann@muster.com;Software Bug;1;Application crash on user login;200000;2
