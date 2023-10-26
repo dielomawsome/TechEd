@@ -75,7 +75,7 @@ The schema we will be working with looks as follows:
 
 <img src="../images/DataModel.png" width="700">
 
-In CAP, there are two ways of modelling relations between entities: [`Compositions` and `Associations`](https://cap.cloud.sap/docs/guides/domain-modeling#associations).
+In CAP, there are two ways of modelling relations between entities: [`Compositions` and `Associations`](https://cap.cloud.sap/docs/guides/domain-modeling#associations). These are built-in features that manage foreign keys. 
 
 A **Composition** is used when you want to imply ownership of one entity to another. In our data model above, we can say that all Mitigations belong to an Incident, in the same way for instance that
 a sales order line item can not exist outside of the sales order header. 
