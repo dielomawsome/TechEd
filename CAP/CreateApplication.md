@@ -85,15 +85,26 @@ This in contrast to: A type belongs to an Incident and cannot live without it.
 
 Knowing this, we can model the following, and we're adding that we created. You can copy and paste it into the file, or you can of course have a go yourself first.
 
+To follow along, the first thing we need in our `schema.cds` is a namespace:
+
 ```js
 namespace sap.ui.riskmanagement;
+```
 
+Next we'll import some aspects and models from the standard CDS libraries. For instance the aspect `managed` will add the usual suspects of `createdBy, createdAt, modifiedBy, modifiedAt` and keeps them in sync when doing database inserts or updates.
+
+```js
 using {
   managed,
   cuid,
   sap.common.CodeList
 } from '@sap/cds/common';
+```
 
+For this app, we're modelling three entities as highlighted in the data model above. `Incidents` is the 'main' entity and looks like this, taking into account one Composition to a 
+number of Mitigations, and an association to the incident Type.
+
+```js
 entity Incidents : cuid, managed {
   title       : String(100);
   prio        : String(5);
@@ -102,22 +113,28 @@ entity Incidents : cuid, managed {
                   on mitigations.incident = $self;
   impact      : Integer;
   criticality : Integer;
-  type: Association to Type;
+  type        : Association to Type;
 }
+```
 
+Mitigations hold the table of possible solutions for an incident
+
+```js
 entity Mitigations : cuid, managed {
   description : String;
   timeline    : String;
   incident    : Association to one Incidents;
 }
+```
 
+Last, type is defined as a `Codelist`, which adds a few standard fields, in addition to some annotations
+
+```js
 entity Type : CodeList {
   key code: Integer;
 }
 ```
 It creates three entities in the namespace ``sap.ui.riskmanagement``: ``Incidents``, ``Type``  and ``Mitigations``. 
-
-It then imports a few standard aspects from the common package that CDS provides. An aspect is a predefined set of fields you can add to an Entity. For instance the aspect `managed` will add the usual suspects of `createdBy, createdAt, modifiedBy, modifiedAt` and keeps them in sync when doing database inserts or updates.
 
 Each of the entities has a key called `ID` and several other properties. An ``Incident`` has one ``Mitigations`` and, therefore, it has an association to exactly one `Incident`. Under the hood, a field is added called `incident_ID`. A ``Mitigation`` in turn can be used for one ``Incident``, so it has a “to one” association. The key is automatically filled by the CAP server, which is exposed to the user of the service via the aspect [``cuid``](https://cap.cloud.sap/docs/cds/common#aspect-cuid). 
 
@@ -132,7 +149,7 @@ Waiting for some to arrive...
 
 Next, you add a service definition.
 
-### 1. Create the OData V4 Service
+### 2. Create the OData V4 Service
 
 > Heads up! The links below to `localhost` apply only to VSCode, BAS will generate its own link that'll open as soon as you run your project
 
@@ -153,7 +170,7 @@ It creates a new service ``IncidentsService`` in the namespace ``sap.ui.riskmana
 
 If you again look at the terminal, you see that the CAP server has noticed the new file and now tells us that it serves something under [http://localhost:4004](http://localhost:4004).
 
-### 1. In your browser open the link [http://localhost:4004](http://localhost:4004).
+### 3. In your browser open the link [http://localhost:4004](http://localhost:4004), or follow the BAS pop up
 
 <img src="../images/WelcomePage.png" width="500">
 
@@ -170,7 +187,7 @@ If you now choose the ``Incidents`` link, you only get this:
 ```
 So, there’s no data yet. This is because so far, your model doesn’t contain any data. You add some now.
 
-### 1. Create a folder called ``data`` in the ``db`` folder of your app. Now download a local copy of all the csv files from this [github repository](./caprisks/db/data/). Copy the files into the newly created ``data`` folder in your project.  
+### 5. Create a folder called ``data`` in the ``db`` folder of your app. Now download a local copy of all the csv files from this [github repository](./caprisks/db/data/). Copy the files into the newly created ``data`` folder in your project.  
 
 You have now added three comma-separated value (CSV) files that contain local data for ``Incidents``, ``Mitigations`` and the ``Employees``  entities. A quick look into the ``sap.ui.riskmanagement-Incidents.csv`` (the name consists of your namespace and the name of your database entity from the schema.cds file) file shows data like this:
 
@@ -186,7 +203,7 @@ To learn more about composition and associations, check out the [CAP help](https
 
 Once again, the CAP server has noticed the changes, you've made.
 
-### 1. Revisit the ``Incidents`` entity [http://localhost:4004/odata/v4/service/incident/Incidents](http://localhost:4004/odata/v4/service/incident/Incidents) in your browser. You now see the data exposed.
+### 6. Revisit the ``Incidents`` entity [http://localhost:4004/odata/v4/service/incident/Incidents](http://localhost:4004/odata/v4/service/incident/Incidents) in your browser. You now see the data exposed.
 
 <img src="../images/IncidentsService.png" width="500">
 
