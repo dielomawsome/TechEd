@@ -106,18 +106,6 @@ annotate IncidentsService.Incidents with @(UI: {
         Text            : type.name,
         TextArrangement : #TextOnly,
         ValueListWithFixedValues: true,
-        // ValueList       : {
-        //     Label          : '{i18n>criticality}',
-        //     CollectionPath : 'Type',
-        //     Parameters     : [
-        //         {
-        //             $Type               : 'Common.ValueListParameterInOut',
-        //             ValueListProperty   : 'type_code',
-        //             LocalDataProperty   : code
-        //         }
-                
-        //     ]
-        // }
     });
 };
 
