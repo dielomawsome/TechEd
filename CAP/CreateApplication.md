@@ -10,7 +10,7 @@ The full code base of the CAP app can be found [here](./caprisks/) should you ne
 In addition, the CAP documentation is actually pretty solid! It has its own [website here](https://cap.cloud.sap/docs/get-started/)
 
 
-## Step 1 - Create and initialize the project
+## Part 1 - Create and initialize the project
 If you're working BAS, make sure you have created a Dev Space based on the Full Stack Cloud Application option, otherwise you might be missing some tooling required for CAP.
 
 ### 1. Open a command line window. In BAS it's here in the hamburger menu:
@@ -66,9 +66,9 @@ The screen now looks like this:
 
 The CAP server tells you that there is no model and no service definitions yet that it can serve. You add some in the next step.
 
-## Step 2 - Add files to the project
+## Part 2 - Adding tables and services to the project
 
-1. Create the database tables
+### 1. Create the database tables
 Create a new file in the ``db`` folder called ``schema.cds``
 
 The schema we will be working with looks as follows:
@@ -117,8 +117,9 @@ entity Type : CodeList {
 ```
 It creates three entities in the namespace ``sap.ui.riskmanagement``: ``Incidents``, ``Type``  and ``Mitigations``. 
 
+It then imports a few standard aspects from the common package that CDS provides. An aspect is a predefined set of fields you can add to an Entity. For instance the aspect `managed` will add the usual suspects of `createdBy, createdAt, modifiedBy, modifiedAt` and keeps them in sync when doing database inserts or updates.
 
-Each of them has a key called ```ID``` and several other properties. An ``Incident`` has one ``Mitigations`` and, therefore, the property ``IncidentID`` has an association to exactly one ``Incident``. A ``Mitigation`` in turn can be used for one ``Incident``, so it has a “to one” association. The key is automatically filled by the CAP server, which is exposed to the user of the service via the aspect [``cuid``](https://cap.cloud.sap/docs/cds/common#aspect-cuid).
+Each of the entities has a key called `ID` and several other properties. An ``Incident`` has one ``Mitigations`` and, therefore, it has an association to exactly one `Incident`. Under the hood, a field is added called `incident_ID`. A ``Mitigation`` in turn can be used for one ``Incident``, so it has a “to one” association. The key is automatically filled by the CAP server, which is exposed to the user of the service via the aspect [``cuid``](https://cap.cloud.sap/docs/cds/common#aspect-cuid). 
 
 
 
@@ -131,7 +132,9 @@ Waiting for some to arrive...
 
 Next, you add a service definition.
 
-1. Create the OData V4 Service
+### 1. Create the OData V4 Service
+
+> Heads up! The links below to `localhost` apply only to VSCode, BAS will generate its own link that'll open as soon as you run your project
 
 Create a file called ``risk-service.cds`` in the ``srv`` folder.
 
@@ -150,11 +153,11 @@ It creates a new service ``IncidentsService`` in the namespace ``sap.ui.riskmana
 
 If you again look at the terminal, you see that the CAP server has noticed the new file and now tells us that it serves something under [http://localhost:4004](http://localhost:4004).
 
-1. In your browser open the link [http://localhost:4004](http://localhost:4004).
+### 1. In your browser open the link [http://localhost:4004](http://localhost:4004).
 
 <img src="../images/WelcomePage.png" width="500">
 
-4. Choose the ``$metadata`` link.
+### 4. Choose the ``$metadata`` link.
 
 You see the OData metadata document of your new service. So, with just the two files for the database schema and the service exposure you added to your project, you have already got a running OData service! You might wonder why the service itself is called ``incident`` even though in the file it’s called ``IncidentsService``. This is a convention in CAP, the service suffix is subtracted from the name.
 
@@ -167,7 +170,7 @@ If you now choose the ``Incidents`` link, you only get this:
 ```
 So, there’s no data yet. This is because so far, your model doesn’t contain any data. You add some now.
 
-1. Create a folder called ``data`` in the ``db`` folder of your app. Now download a local copy of all the csv files from this [github repository](./caprisks/db/data/). Copy the files into the newly created ``data`` folder in your project.  
+### 1. Create a folder called ``data`` in the ``db`` folder of your app. Now download a local copy of all the csv files from this [github repository](./caprisks/db/data/). Copy the files into the newly created ``data`` folder in your project.  
 
 You have now added three comma-separated value (CSV) files that contain local data for ``Incidents``, ``Mitigations`` and the ``Employees``  entities. A quick look into the ``sap.ui.riskmanagement-Incidents.csv`` (the name consists of your namespace and the name of your database entity from the schema.cds file) file shows data like this:
 
@@ -183,7 +186,7 @@ To learn more about composition and associations, check out the [CAP help](https
 
 Once again, the CAP server has noticed the changes, you've made.
 
-1. Revisit the ``Incidents`` entity [http://localhost:4004/odata/v4/service/incident/Incidents](http://localhost:4004/odata/v4/service/incident/Incidents) in your browser. You now see the data exposed.
+### 1. Revisit the ``Incidents`` entity [http://localhost:4004/odata/v4/service/incident/Incidents](http://localhost:4004/odata/v4/service/incident/Incidents) in your browser. You now see the data exposed.
 
 <img src="../images/IncidentsService.png" width="500">
 
