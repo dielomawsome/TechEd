@@ -12,35 +12,37 @@ You will learn:
 ## Overview
 An SAP Fiori elements app is an application that leverages SAPUI5, SAPUI5 controls, and SAPUI5 model view controller (MVC) concepts. In a plain SAPUI5 or a freestyle SAPUI5 app, all the views and controllers are part of your project. In contrast, in an SAP Fiori elements app most of the code is outside of the project, managed centrally by the SAP Fiori elements team. The code inside your project only references these central components. They take care of creating the UI according to the latest SAP Fiori design guidelines and cover all the controller logic for you out of the box. The UI can be influenced by OData annotations. They determine, for example, which properties of an OData service make up the columns of a table that displays the content of the service.
 
-## Step 1 - Generate the UI with an SAP Fiori elements template
+## Part 1 - Generate the UI with an SAP Fiori elements template
 
-1. In VS Code, invoke the Command Palette ( View → Command Palette or Shift + Command + P for macOS / Ctrl + Shift + P for Windows) and choose Fiori: Open Application Generator.
+To generate a UI, we use the Fiori tooling. 
 
-2. Choose template type **SAP Fiori** and template **List Report Page**.
+### 1. Invoke the Command Palette ( View → Command Palette or Shift + Command + P for macOS / Ctrl + Shift + P for Windows) and choose Fiori: Open Application Generator.
+
+### 2. Choose template type **SAP Fiori** and template **List Report Page**.
 
 <img src="../images/OpenApplicationGenerator.png" width="500">
 
-3. Choose Next.
+### 3. Choose Next.
 
-4. In the next dialog, choose ``Use a Local CAP Project`` and choose your current ``caprisks`` project.
+### 4. In the next dialog, choose ``Use a Local CAP Project`` and choose your current ``caprisks`` project.
 
 <img src="../images/GeneratorListReport.png" width="500">
 
-5. Select ``Incidents`` as the main entity, choose the option **No** to avoid adding table columns automatically. Choose **Next**.
+### 5. Select ``Incidents`` as the main entity, choose the option **No** to avoid adding table columns automatically. Choose **Next**.
 
 <img src="../images/GeneratorEntitySelection.png" width="500">
 
-6. Enter ``incidents`` as the module name and ``Incidents`` as the application title.
+### 6. Enter ``incidents`` as the module name and ``Incidents`` as the application title.
 
-7. Enter ``ns`` as the namespace and ``Incidents`` as the description for the application 
+### 7. Enter ``ns`` as the namespace and ``Incidents`` as the description for the application 
 
-8. Leave the default values for all other settings.
+### 8. Leave the default values for all other settings.
 
-9. Choose **Finish** to generate the application.
+### 9. Choose **Finish** to generate the application.
 
 <img src="../images/GeneratorProjectAttributes.png" width="500">
 
-10. On completion the **Application Info** should open 
+### 10. On completion the **Application Info** should open 
 
 <img src="../images/GeneratorAppInfo.png" width="500">
 
@@ -58,26 +60,29 @@ View the page map by selecting  ``Open Page Map`` to see a view of the applicati
 npm i @sap/ux-specification --save-dev
 ```
 
-## Step 2 - Modify the UI with OData annotations
+## Part 2 - Modify the UI with OData annotations
 
-1. If it is not still running from the previous tutorial, execute ``cds watch`` in a VS Code terminal and switch to [http://localhost:4004](http://localhost:4004) in your browser.
+### 1. If it is not still running from the previous tutorial, execute ``cds watch`` in a VS Code terminal and switch to [http://localhost:4004](http://localhost:4004) in your browser.
 
 You can now see that the CAP server has discovered an HTML page in your ``app`` folder:
 
 <img src="../images/WelcomePageFioriApp.png" width="500">
 
-2. Choose the link [http://localhost:4004/incidents/webapp/index.html](http://localhost:4004/incidents/webapp/index.html) for the HTML page.
+### 2. Choose the link [http://localhost:4004/incidents/webapp/index.html](http://localhost:4004/incidents/webapp/index.html) for the HTML page.
 
-3. You can now see the application without any data
+### 3. You can now see the application without any data
 
 <img src="../images/IncidentsAppEmpty.png" width="500">
 
 There are no visible columns because the application is currently missing UI annotations. You add them in the next step
 
-4. To add the OData annotations, create a file ``incidents-service-ui.cds`` in the ``srv`` folder of your app.
+### 4. Add some annotations to change the UI.
+
+You'll find that the Fiori Elements Generator created a file called `annotations.cds` in the `app/incidents` folder. This is where the Page Map sticks annotations, and where you can 
+add your own by hand. Annotations can be a bit confusing so we suggest copying these as-is. 
 
 ```js
-using IncidentsService from './risk-service';
+using IncidentsService as service from '../../srv/risk-service';
 
 annotate IncidentsService.Incidents with {
     title  @title: 'Title';
@@ -142,7 +147,8 @@ annotate IncidentsService.Incidents with @(UI: {
     FieldGroup #Main       : {Data: [
         {Value: prio, },
         {Value: impact, },
-        {Value: descr, }
+        {Value: descr, },
+        {Value: type_code }
     ]},
 
 
@@ -160,7 +166,32 @@ annotate IncidentsService.Incidents with @(UI: {
         ],
     }
 
-}, );
+}, ) {
+    type @title: 'Type' 
+    @(Common : {
+        Text            : type.name,
+        TextArrangement : #TextOnly,
+        ValueListWithFixedValues: true,
+        ValueList       : {
+            Label          : '{i18n>criticality}',
+            CollectionPath : 'Type',
+            Parameters     : [
+                {
+                    $Type               : 'Common.ValueListParameterInOut',
+                    ValueListProperty   : 'code',
+                    LocalDataProperty   : type_code
+                }
+                
+            ]
+        }
+    });
+    type_code @title: 'Type' 
+      @(Common : {
+        Text            : type.name,
+        TextArrangement : #TextOnly,
+        ValueListWithFixedValues: true,
+    });
+};
 
 annotate IncidentsService.Mitigations with @(UI.LineItem #Mitigations: [
     {
@@ -173,23 +204,30 @@ annotate IncidentsService.Mitigations with @(UI.LineItem #Mitigations: [
     },
 ]);
 
-
+annotate IncidentsService.Type with {
+    code @title: 'Type'
+      @(Common : {
+        Text            : name,
+        TextArrangement : #TextOnly
+    });
+    name @title: 'Name';
+}
 ```
 
 As in the steps before, the CAP server has noticed the new file and compiled the service again, so now it contains the additional annotations.
 
-5. In your browser, reload the page of the empty SAP Fiori elements app.
+### 5. In your browser, reload the page of the empty SAP Fiori elements app.
 
-6. Choose **Go**
+### 6. Choose **Go**
 
 It now shows a work list with some columns and the data from the service.
 
 <img src="../images/IncidentsApp.png" width="500">
 
 
-## Step 3 - Add Business Logic to Your Application
+## Part 3 - Add Business Logic to Your Application
 
-1. Create a file ``risk-service.js`` in the ``srv`` folder of your app
+### 1. Create a file ``risk-service.js`` in the ``srv`` folder of your app
 
 Copy the code below into the file you just created
 ```js
