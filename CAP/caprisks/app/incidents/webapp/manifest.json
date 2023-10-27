@@ -123,7 +123,32 @@
                         "settings": {
                             "editableHeaderContent": false,
                             "contextPath": "/Incidents",
-                            "navigation": {}
+                            "navigation": {},
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "FindSolution": {
+                                            "press": "ns.incidents.ext.controller.FindSolution.onPress",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "Find solution"
+                                        }
+                                    }
+                                },
+                                "body": {
+                                    "sections": {
+                                        "Files": {
+                                            "template": "ns.incidents.ext.fragment.Files",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "Mitigations"
+                                            },
+                                            "title": "Files",
+                                            "type": "XMLFragment"
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
