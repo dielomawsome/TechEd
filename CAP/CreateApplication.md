@@ -150,7 +150,7 @@ Next, you add a service definition.
 
 ### 2. Create the OData V4 Service
 
-> Heads up! The links below to `localhost` apply only to VSCode, BAS will generate its own link that'll open as soon as you run your project
+> Heads up! The links below to `localhost` apply only to VSCode, BAS will generate its own link that'll open as soon as you watch your project
 
 Create a file called ``risk-service.cds`` in the ``srv`` folder.
 
@@ -196,16 +196,18 @@ ID;createdAt;createdBy;title;prio;descr;impact;type_code
 ...
 ```
 
-The first line contains all the properties from your ``Incidents`` entity. While the other ones are straight forward, consider the ``employee_ID`` property. In your entity, you only have a ``employee`` property, so where does it come from? ``ownerEmployee_Id`` is an association to ``Employees``, as ``Incidents`` could have several key properties, the association on the database needs to point to all of these, therefore the CAP server creates a property ``<AssociationProperty>_<AssociatedEntityKey>`` for each key.
+The first line contains all the properties from your ``Incidents`` entity. While most of the fields ones are straight forward, consider the ``type_code`` property. In your entity, you only have a ``type`` property, so where does it come from? ``type_code`` is an association to ``Type``, as ``Incidents``, CAP creates a foreign key itself that follows the naming convention ``<AssociationProperty>_<AssociatedEntityKey>`. Once deployed you'll find these fields in your actual database. This *can* be a little confusing because sometimes in the annotations you refer to this key directly.
 
 To learn more about composition and associations, check out the [CAP help](https://cap.cloud.sap/docs/cds/cdl#associations)
 
-Once again, the CAP server has noticed the changes, you've made.
+Once again, the CAP server has noticed the changes you've made and will reload as soon as you save or add these files. 
+
+There are example CSV files in the app provided in this repository if you're looking for some assistance.
 
 ### 6. Revisit the ``Incidents`` entity [http://localhost:4004/odata/v4/service/incident/Incidents](http://localhost:4004/odata/v4/service/incident/Incidents) in your browser. You now see the data exposed.
 
 <img src="../images/IncidentsService.png" width="500">
 
-When you revisit the ``Incidents`` entity, you might see something simlar  but not this nicely-formatted JSON output above. This doesn’t mean you have made a mistake in the tutorial. Rather, this is just a formatted output.  There are various chrome/edge extensions to install that will do this for you. 
+When you revisit the ``Incidents`` entity, you might see something simlar but not this nicely-formatted JSON output above. This doesn’t mean you have made a mistake in the tutorial. Rather, this is just a formatted output.  There are various chrome/edge extensions to install that will do this for you. 
 
 And that’s it. You now have a full blown OData service, which complies with the OData standard and supports the respective queries without having to code anything but the data model and exposing the service itself. 

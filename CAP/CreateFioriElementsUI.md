@@ -79,7 +79,9 @@ There are no visible columns because the application is currently missing UI ann
 ### 4. Add some annotations to change the UI.
 
 You'll find that the Fiori Elements Generator created a file called `annotations.cds` in the `app/incidents` folder. This is where the Page Map sticks annotations, and where you can 
-add your own by hand. Annotations can be a bit confusing so we suggest copying these as-is. 
+add your own by hand. You can use the Page Map to add columns, fields, sections etc to your list and object page and it's worth experimenting with this.
+
+Annotations can be a bit confusing though so if you're stuck, here are the annotations that our sample is using:
 
 ```js
 using IncidentsService as service from '../../srv/risk-service';
@@ -227,9 +229,13 @@ It now shows a work list with some columns and the data from the service.
 
 ## Part 3 - Add Business Logic to Your Application
 
-### 1. Create a file ``risk-service.js`` in the ``srv`` folder of your app
+### 1. Add a service implementation to place your hooks
 
-Copy the code below into the file you just created
+Every service has a series of hooks: `on`, `before` or `after` events such as `create` or `update`, in addition to implementing actions and functions. By default, the implementation 
+of this is a a javascript file name the same as your service. So, please create a file ``risk-service.js`` in the ``srv`` folder of your app. 
+
+Copy the code below into the file you just created. This bit of code is going to dynamically add the criticality of the incident based on the impact. 
+
 ```js
 
 /**
@@ -250,7 +256,7 @@ module.exports = async (srv) => {
 };
 ```
 
-In your browser, reload the page of the SAP Fiori elements app.
+In your browser, your Fiori Elements app will reload and reflect these changes. 
 
 It now shows our work list with the columns ``Priority`` and ``Impact`` with color and an icon, depending on the amount in Impact.
 
