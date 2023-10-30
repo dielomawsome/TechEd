@@ -1,5 +1,27 @@
-<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:macros="sap.fe.macros">
+<core:FragmentDefinition xmlns:w="sap.ui.webc.main" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:macros="sap.fe.macros">
 	<VBox>
-		<Button core:require="{ handler: 'ns/incidents/ext/fragment/Files'}" text="Files" press="handler.onPress" />
+		<HBox>
+			<w:FileUploader placeholder="Upload file..." core:require="{ handler: 'ns/incidents/ext/fragment/Files'}" change="handler.handleChange"></w:FileUploader>
+			<Button
+				text="Upload File"
+				core:require="{ handler: 'ns/incidents/ext/fragment/Files'}"
+				press="handler.handleUploadPress" />
+		</HBox>
+		<List
+			id="list"
+			enableBusyIndicator="true"
+			headerText="List from AWS"
+			growing="true"
+			items="{
+				path: '/FileList()'
+			}">
+			<ObjectListItem
+				title="{Name}"
+				type="Active"
+				core:require="{ handler: 'ns/incidents/ext/fragment/Files'}"
+				press="handler.onListItemPress"
+				number="{= Math.round(${Size} / 1024) } KB" />
+		</List>
 	</VBox>
 </core:FragmentDefinition>
