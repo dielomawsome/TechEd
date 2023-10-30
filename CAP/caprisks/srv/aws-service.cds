@@ -1,6 +1,7 @@
-service AWSService {
+@protocol: 'rest'
 
-    entity FileList{
-        key ![Key]: String;
-    }
+@open
+service AWSService {
+     type object {};
+      function FileList() returns array of object;
 }
