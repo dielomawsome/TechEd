@@ -18,7 +18,7 @@ module.exports = cds.service.impl(async (srv) => {
             if (filesJson && filesJson.ListBucketResult && filesJson.ListBucketResult.Contents) {
             
                 const files = filesJson.ListBucketResult.Contents.map(file=>{
-                    file.FileLocation = "https://2jm9jcmsc5.execute-api.us-east-1.amazonaws.com/v1/appgyver-1/" + file.Key
+                    file.FileLocation = "/rest/aws/File(" + file.Key + ")"
                     return file
                 }).filter(file=>{
                     if(file.Key.endsWith(".pdf")){
