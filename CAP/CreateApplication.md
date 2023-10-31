@@ -7,7 +7,7 @@ You will learn
 
 The full code base of the CAP app can be found [here](./caprisks/) should you need to check or copy the code. 
 
-In addition, the CAP documentation is actually pretty solid! It has its own [website here](https://cap.cloud.sap/docs/get-started/)
+In addition, the CAP documentation is actually pretty solid! It has its own [website here](https://cap.cloud.sap/docs/get-started/jumpstart)
 
 
 ## Part 1 - Create and initialize the project

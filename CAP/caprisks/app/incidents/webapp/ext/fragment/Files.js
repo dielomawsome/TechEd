@@ -1,13 +1,16 @@
+/* eslint-disable no-undef */
 sap.ui.define(["sap/m/MessageToast"], function (MessageToast) {
   "use strict";
   let file;
-  const url = "https://2jm9jcmsc5.execute-api.us-east-1.amazonaws.com/v1/appgyver-1";
+
+  const url = 'https://2jm9jcmsc5.execute-api.us-east-1.amazonaws.com/v2/appgyver-1'
   return {
     handleUploadPress: async function () {
       if (file) {
         try {
           const headers = new Headers();
           headers.append("Content-Type", file.type);
+          // headers.append("x-api-key", 'ahfS1bT5UY3v0RafHqSIk9A9P3LkmZei4M5CiYIN');
           
           const body = new FormData();
           body.append("file", file, file.name);
@@ -17,9 +20,10 @@ sap.ui.define(["sap/m/MessageToast"], function (MessageToast) {
             method: 'PUT',
             headers,
             body
-          })
-
-            MessageToast.show("File uploaded successfully")
+          });
+          
+          this.byId('fe::CustomSubSection::Files--list').getBinding('items').refresh()
+          MessageToast.show("File uploaded successfully")
         } catch(e) {
           MessageToast.show("Error! File not uploaded");
         }
