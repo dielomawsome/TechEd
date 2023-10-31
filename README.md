@@ -299,194 +299,180 @@ Search for API Gateway and click on the service on the menu
 
 ![Alt text](./images/image-24.png)
 
-The API Gateway UI is going through a redesign. You're going to use the new console so click on the option at the top within the blue bar or the option on the left panel
 
-![Alt text](./images/image-25.png)
-
-2.  Create REST API
+2.	Select **REST API - Build**
 
 On the API Gateway screen, scroll down to REST API
-![Alt text](./images/image-26.png)
+![Alt text](./images/aws-20.png)
 
 Click Build
 
-![Alt text](./images/image-27.png)
 
-Select New API. Enter a name for your API. The endpoint type should be set to Regional. 
-Click on Create API
-![Alt text](./images/image-28.png)
+3.	Select **New API**, enter your **API name** and leave **Endpoint Type = Regional**. Click **Create API**
 
+    ![Alt text](./images/aws-21.png)
 
-3. Create Resources
-
-The resources will allow us to map the URL call to the S3 Bucket and the file. 
-Click on create resource
-
-![Alt text](./images/image-29.png)
-
-The first resource will be called {folder}. This will be used in the API URL to indicate the bucket name. 
-Tick the CORS checkbox and click Create resource
-
-![Alt text](./images/image-30.png)
-
-Create another resource (ensure you have {folder} selected which would be by default after creating it)
-
-![Alt text](./images/image-31.png)
-
-This resource you're going to name it {item} and will represent the file name in the API call.
-Ensure that /{folder}/ is the preceding resource. 
-Tick the CORS checkbox and click Create resource
-
-![Alt text](./images/image-32.png)
+4.	Create Resource **{folder}**.  
+    Ensure you enter **{folder}** for the **Resource Name** and **Resource Path** field.  
 
 
-4. Create GET Method
+    ![Alt text](./images/aws-22.png)
+    ![Alt text](./images/image-14.png)
 
-Now you're going to create the GET method to read the files.
-Click on Create method. Emsure you've selected {item} on the resources path on the left. This would be the default after creating the resource
+5.	Create resource **{item}** under {folder}. Ensure you enter **{item}** for both the **Resource Name** and **Resource Path** field. 
 
-![Alt text](./images/image-33.png)
+    ![Alt text](./images/image-15.png)
+    ![Alt text](./images/image-16-2.png)
 
+6.	Create method **PUT** under {item}
+    Ensure **{item}** is selected
 
-On the next screen, first select GET as the method. This defines the GET method for the API we're creating.
-Then click on the AWS Service box. 
-Select the region us-east-1 and Simple Storage Service (S3) from the AWS Service from the respective dropdowns. 
+    ![Alt text](./images/aws-26.png)
 
-![Alt text](./images/image-34.png)
- 
-Scroll down and select the GET method. This select the GET Method from the S3 service. 
-Select the Use path override radio button as Action type.
-In the Path override field enter {bucket}/{object}. This will define the path to call the S3 API and will allow you to map the resources defined previously.
-In the execution role, enter the ARN for the role you created earlier. This allows the API to utilise the policies defined in the role when it is invoked. 
-Click on Create method
+7.	Select **PUT** and click on the refresh button next to it to view the form.
+    
+    ![Alt text](./images/aws-27.png)
 
-![Alt text](./images/image-35.png)
+8.	Update with the following information. Leave the rest as default/blank.
 
-The next step is to map the url parameters to the Bucket and Object parameters from our S3 bucket.
-With the GET method selected on the tree on the left, click on Integration request (any of the two highlighted options)
+    ```
+    Integration type: AWS Service
+    AWS Region: your region
+    AWS Service: Simple Storage Service (S3)
+    HTTP Method: PUT
+    Action Type: Use path override
+    Path override: {bucket}/{object}
+    Execution Role: resource name for the role created in the previous section.
+    ```
+    ![Alt text](./images/aws-28.png)
 
- ![Alt text](./images/image-36.png)
-
-Click Edit
-
-![Alt text](./images/image-37.png)
-
-Scroll down
-
-![Alt text](./images/image-38.png)
-
-Expand the URL path parameters and click add path parameter 
-
-![Alt text](./images/image-39.png)
-
-Add the two parameters as per the mapping below. This maps the folder and item (file) from the URL to the S3 bucket and object names.
+9.	In the next screen select **Integration Request**.
+    We need to map the path (bucket/object) to the resources we created (folder/item)
+    
+    ![Alt text](./images/aws-29.png)
+    
+10.	Expand URL Path Parameters and select Add path.
+    
+    ![Alt text](./images/aws-30.png)
+    
+11.	Enter the following mappings
 
     ```
     Name: bucket - Mapped from: method.request.path.folder 
     Name: object – Mapped from: method.request.path.item
     ```
 
-Click Save
+    ![Alt text](./images/aws-31.png)
 
-![Alt text](./images/image-40.png)
+    Make sure you click on the tick after entering the second line:
 
+    ![Alt text](./images/aws-32.png)
 
-5. Create PUT Method
+12.	Go back by selecting Method Execution at the top and select **Create Method**, to define the **GET** method
 
-Next you will create the PUT method. The steps are the same as with the GET method, with the exception of selecting PUT instead of GET.
-First click on {item} so you're on the right place and the Create method button will display on the right panel.
+    ![Alt text](./images/aws-33.png)
 
-![Alt text](./images/image-41.png)
+    ![Alt text](image-4.png)
 
-Click in Create method
+13.	Use the same settings from the PUT method, except for the HTTP method (GET in this case)
 
-![Alt text](./images/image-42.png)
+    ![Alt text](./images/aws-34.png)
 
-Select the PUT method.
-As before, select AWS Service, us-east-1 and Simple Storage Service (S3)
+14.	Enter the URL Path Parameters (same parameters used for the PUT Method)
+    ![Alt text](./images/aws-35.png)
 
-![Alt text](./images/image-43.png)
+15.	Click on Method Execution to go back
+    ![Alt text](./images/aws-36.png)
 
-Scroll down and select the PUT method. 
-Select Use path override, enter {bucket}/{object} and the ARN from your role.
-Click Create method once you're done.
+16. You need to map the Content-Type so the API can display the files in the browsers. Select **Method Response**
 
-![Alt text](./images/image-44.png)
+    ![Alt text](image-5.png)
 
-Next select Integration request from any of the two options.
+17. Expand the HTTP Status 200 and remove the Content type 'application/json' by clicking on the x 
 
-![Alt text](./images/image-45.png)
+    ![Alt text](image-6.png)
 
-Click Edit
+18. Add Content-Type as Response Header. Select Add Header and enter 'Content-Type'.
 
-![Alt text](./images/image-46.png)
+    ![Alt text](image-7.png)
 
+    ![Alt text](image-8.png)
 
-Scroll down
+    Click on the tick button to accept the changes. 
 
-![Alt text](./images/image-47.png)
+    Go back to the previous step by clicking on **Method Execution** at the top. 
 
-Expand URL path paremeters and add the two parameters, same as with the GET Method. 
-
-
-![Alt text](./images/image-48.png)
-
- ```
-    Name: bucket - Mapped from: method.request.path.folder 
-    Name: object – Mapped from: method.request.path.item
-```
-
-Click Save
-
-![Alt text](./images/image-49.png)
-
-6. Enable Binary media types
-
-By default, binary media types are not permitted. 
-In this case, you're going to enable PDF files. 
-Click on API Settings on the left panel
-
-![Alt text](./images/image-50.png)
-
-Click on Manage media types
-
-![Alt text](./images/image-51.png)
-
-Click on Add binary media type
-
-![Alt text](./images/image-52.png)
-
-Enter application/pdf and click Save changes
-
-![Alt text](./images/image-53.png)
+    ![Alt text](image-9.png)
 
 
-7. Deploy API
+19. Map the Content-Type from the file retrieved from S3. Select **Integration Response** 
 
-Click on Resources on the left side panel
+    ![Alt text](image-10.png)
 
-![Alt text](./images/image-54.png)
+    Expand the line by clicking in the triangle and select the change (pencil button) for the Content-Type Response header.
 
-Click on the Deploy API button
+    ![Alt text](image-11.png)
+    
+    Update the mapping with the following value and click the tick button. 
 
-![Alt text](./images/image-55.png)
+    ``` 
+    integration.response.header.Content-Type
+    ```
 
-Next you have to select a Stage. A stage allows you to have different versions of an API. This is commonly used to differentiate versions.
+    Click on **Method Execution** to go back
 
-![Alt text](./images/image-56.png)
+    ![Alt text](image-12.png)
 
-Since it is the first time you're deploying, you have to create a stage. Select New Stage from the dropdown
 
-![Alt text](./images/image-57.png)
+20. Enable **CORS**
 
-Enter a name (i.e.: v1). This will be used in the API URL.
-Click on Deploy.
+    From the actions menu, select **Enable CORS**
 
-![Alt text](./images/image-58.png)
+   ![Alt text](image-13.png)
 
-The API is now ready to be used. You can see the URL in the Invoke URL field
 
-![Alt text](./images/image-59.png)
+Ensure both PUT and GET methods are selected. Click on **Enable CORS and repkace existing CORS headers**
+    ![Alt text](image-1.png)
+    ![Alt text](image-2.png)
+    ![Alt text](image-3.png)
+    
+Please note that when enabling CORS, the Method Response and Integration Responses will be updated and an entry for Access-Control-Allow-Origin added. No action is required but you will notice this as an additional value.
+
+21.	Click on Settings on the left side to configure the Binary Media Types supported.
+    ![Alt text](./images/aws-37.png)
+
+
+
+22.	Scroll down, click on **Add Binary Media Type** and enter **application/pdf**
+
+
+    This will configure binary support for PDF files.
+
+    ![Alt text](image-14.png)
+
+    Click on **Save Changes**. 
+
+23.	 Navigate back to the Resources Method by clicking on **Resources**
+
+ ![Alt text](image.png)
+
+
+
+26.	Deploy API
+    
+    Click on the **Actions** dropdown and select Deploy API
+
+    ![Alt text](./images/aws-42.png)
+
+27.	Create a New Stage, enter a Stage name, Stage description and Deployment description and click Deploy
+
+    ![Alt text](./images/aws-43.png)
+
+28.	Leave all settings with their default values and click Save Changes
+    
+    ![Alt text](./images/aws-44.png)
+
+    You will find the URL for your API at the top of this page, under Invoke URL. Note down this Invoke URL.
 
 </details>
 
