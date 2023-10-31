@@ -10,7 +10,6 @@ sap.ui.define(["sap/m/MessageToast"], function (MessageToast) {
         try {
           const headers = new Headers();
           headers.append("Content-Type", file.type);
-          // headers.append("x-api-key", 'ahfS1bT5UY3v0RafHqSIk9A9P3LkmZei4M5CiYIN');
           
           const body = new FormData();
           body.append("file", file, file.name);
@@ -21,7 +20,7 @@ sap.ui.define(["sap/m/MessageToast"], function (MessageToast) {
             headers,
             body
           });
-          
+
           this.byId('fe::CustomSubSection::Files--list').getBinding('items').refresh()
           MessageToast.show("File uploaded successfully")
         } catch(e) {
