@@ -1,5 +1,7 @@
 using IncidentsService as service from '../../srv/risk-service';
 
+// These annotations add a few titles to the fields in the Incidents service
+// Titles are displayed in the UI as labels for the fields or headers for the columns
 annotate IncidentsService.Incidents with {
     title  @title: 'Title';
     prio   @title: 'Priority';
@@ -7,16 +9,18 @@ annotate IncidentsService.Incidents with {
     impact @title: 'Impact';
 }
 
+//These annotations add a few titles to the fields in the Mitigations service
 annotate IncidentsService.Mitigations with {
-    ID            @(
-        UI.Hidden,
-        Common: {Text: description}
-    );
     description   @title: 'Description';
     timeline      @title: 'Timeline';
 }
 
+//See the annotation starting with @(UI: { below? That indications we're adding UI annotations. 
+//In this case, the annotations specifcy the UI elements that should be displayed for the Incidents service.
+//More specifically, we're adding a header, a selection field, a line item, and a facet.
+//The facet is displayed in the body of the object page and are referenced by the ID 'Mitigations' and 'Main' respectively.
 annotate IncidentsService.Incidents with @(UI: {
+    //HeaderInfo defines the header of the object page
     HeaderInfo             : {
         TypeName      : 'Incident',
         TypeNamePlural: 'Incidents',
@@ -30,7 +34,9 @@ annotate IncidentsService.Incidents with @(UI: {
         },
         TypeImageUrl  : 'sap-icon://alert'
     },
+    //SelectionFields define the fields in the filter bar
     SelectionFields        : [prio],
+    //LineItem defines the columns in the table in the List Report
     LineItem               : [
         {Value: title},
         {Value: descr},
@@ -47,6 +53,7 @@ annotate IncidentsService.Incidents with @(UI: {
             Criticality: criticality
         }
     ],
+    //Facets define the sections in the object page
     Facets                 : [
         {
             $Type : 'UI.ReferenceFacet',
@@ -60,6 +67,7 @@ annotate IncidentsService.Incidents with @(UI: {
             Target: 'mitigations/@UI.LineItem#Mitigations',
         },
     ],
+    //QuickViewFacets define the sections in the quick view
     FieldGroup #Main       : {Data: [
         {Value: prio, },
         {Value: impact, },
@@ -67,7 +75,7 @@ annotate IncidentsService.Incidents with @(UI: {
         {Value: type_code }
     ]},
 
-
+    //QuickViewFacets define the sections in the quick view
     FieldGroup #Mitigation1: {
         $Type: 'UI.FieldGroupType',
         Data : [
