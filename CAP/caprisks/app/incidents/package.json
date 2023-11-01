@@ -11,5 +11,7 @@
     "scripts": {
         "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf"
     },
-    "devDependencies": { }
+    "dependencies": {
+        "@sap/ux-specification": "^1.108.16"
+    }
 }

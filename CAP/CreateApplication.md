@@ -7,7 +7,7 @@ You will learn
 
 The full code base of the CAP app can be found [here](./caprisks/) should you need to check or copy the code. 
 
-In addition, the CAP documentation is actually pretty solid! It has its own [website here](https://cap.cloud.sap/docs/get-started/)
+In addition, the CAP documentation is actually pretty solid! It has its own [website here](https://cap.cloud.sap/docs/get-started/jumpstart)
 
 
 ## Part 1 - Create and initialize the project
@@ -34,7 +34,7 @@ cd caprisks
 cds init
 ```
 
-<img src="../images/CDSInit.png" width="500">
+<img src="../images/CDSInit.png">
 
 
 ### For VSCode users
@@ -52,7 +52,7 @@ This installs all the dependencies for the project.  You can find these listed i
 ```bash
 npm install
 ```
-<img src="../images/npmInstall.png" width="500">
+<img src="../images/npmInstall.png">
 
 ### 6. In the VS Code terminal, start a CAP server.
 ```bash
@@ -62,7 +62,7 @@ The CAP server serves all the CAP sources from your project. It also “watches�
 
 The screen now looks like this:
 
-<img src="../images/CDSWatchEmpty.png" width="500">
+<img src="../images/CDSWatchEmpty.png">
 
 The CAP server tells you that there is no model and no service definitions yet that it can serve. You add some in the next step.
 
@@ -139,7 +139,7 @@ Each of the entities has a key called `ID` and several other properties. An ``In
 
 
 
-Notice how the CAP server reacted to dropping the file. It now tells you that it has a model but there are no service definitions yet and, thus, it still can’t serve anything. 
+Notice how the CAP server reacted to saving and creating the file. It now tells you that it has a model but there are no service definitions yet and, thus, it still can’t serve anything. The following will be at the bottom of the console output:
 
 ```
 No service definitions found in loaded models.
@@ -150,7 +150,7 @@ Next, you add a service definition.
 
 ### 2. Create the OData V4 Service
 
-> Heads up! The links below to `localhost` apply only to VSCode, BAS will generate its own link that'll open as soon as you run your project
+> Heads up! The links below to `localhost` apply only to VSCode, BAS will generate its own link that'll open as soon as you watch your project
 
 Create a file called ``risk-service.cds`` in the ``srv`` folder.
 
@@ -171,7 +171,7 @@ If you again look at the terminal, you see that the CAP server has noticed the n
 
 ### 3. In your browser open the link [http://localhost:4004](http://localhost:4004), or follow the BAS pop up
 
-<img src="../images/WelcomePage.png" width="500">
+<img src="../images/WelcomePage.png">
 
 ### 4. Choose the ``$metadata`` link.
 
@@ -196,16 +196,18 @@ ID;createdAt;createdBy;title;prio;descr;impact;type_code
 ...
 ```
 
-The first line contains all the properties from your ``Incidents`` entity. While the other ones are straight forward, consider the ``employee_ID`` property. In your entity, you only have a ``employee`` property, so where does it come from? ``ownerEmployee_Id`` is an association to ``Employees``, as ``Incidents`` could have several key properties, the association on the database needs to point to all of these, therefore the CAP server creates a property ``<AssociationProperty>_<AssociatedEntityKey>`` for each key.
+The first line contains all the properties from your ``Incidents`` entity. While most of the fields ones are straight forward, consider the ``type_code`` property. In your entity, you only have a ``type`` property, so where does it come from? ``type_code`` is an association to ``Type``, as ``Incidents``, CAP creates a foreign key itself that follows the naming convention ``<AssociationProperty>_<AssociatedEntityKey>`. Once deployed you'll find these fields in your actual database. This *can* be a little confusing because sometimes in the annotations you refer to this key directly.
 
 To learn more about composition and associations, check out the [CAP help](https://cap.cloud.sap/docs/cds/cdl#associations)
 
-Once again, the CAP server has noticed the changes, you've made.
+Once again, the CAP server has noticed the changes you've made and will reload as soon as you save or add these files. 
+
+There are example CSV files in the app provided in this repository if you're looking for some assistance.
 
 ### 6. Revisit the ``Incidents`` entity [http://localhost:4004/odata/v4/service/incident/Incidents](http://localhost:4004/odata/v4/service/incident/Incidents) in your browser. You now see the data exposed.
 
-<img src="../images/IncidentsService.png" width="500">
+<img src="../images/IncidentsService.png">
 
-When you revisit the ``Incidents`` entity, you might see something simlar  but not this nicely-formatted JSON output above. This doesn’t mean you have made a mistake in the tutorial. Rather, this is just a formatted output.  There are various chrome/edge extensions to install that will do this for you. 
+When you revisit the ``Incidents`` entity, you might see something simlar but not this nicely-formatted JSON output above. This doesn’t mean you have made a mistake in the tutorial. Rather, this is just a formatted output.  There are various chrome/edge extensions to install that will do this for you. 
 
 And that’s it. You now have a full blown OData service, which complies with the OData standard and supports the respective queries without having to code anything but the data model and exposing the service itself. 

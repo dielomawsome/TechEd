@@ -20,17 +20,17 @@ To generate a UI, we use the Fiori tooling.
 
 ### 2. Choose template type **SAP Fiori** and template **List Report Page**.
 
-<img src="../images/OpenApplicationGenerator.png" width="500">
+<img src="../images/OpenApplicationGenerator.png">
 
 ### 3. Choose Next.
 
 ### 4. In the next dialog, choose ``Use a Local CAP Project`` and choose your current ``caprisks`` project.
 
-<img src="../images/GeneratorListReport.png" width="500">
+<img src="../images/GeneratorListReport.png">
 
 ### 5. Select ``Incidents`` as the main entity, choose the option **No** to avoid adding table columns automatically. Choose **Next**.
 
-<img src="../images/GeneratorEntitySelection.png" width="500">
+<img src="../images/GeneratorEntitySelection.png">
 
 ### 6. Enter ``incidents`` as the module name and ``Incidents`` as the application title.
 
@@ -40,11 +40,11 @@ To generate a UI, we use the Fiori tooling.
 
 ### 9. Choose **Finish** to generate the application.
 
-<img src="../images/GeneratorProjectAttributes.png" width="500">
+<img src="../images/GeneratorProjectAttributes.png">
 
 ### 10. On completion the **Application Info** should open 
 
-<img src="../images/GeneratorAppInfo.png" width="500">
+<img src="../images/GeneratorAppInfo.png">
 
 The application is now generated and in a few seconds you can see it in the ``app`` folder of your project. It contains a ``incidents`` and a ``webapp`` folder with a ``Component.js`` file that is characteristic for an SAPUI5 app.
 
@@ -53,7 +53,7 @@ The application is now generated and in a few seconds you can see it in the ``ap
 
 View the page map by selecting  ``Open Page Map`` to see a view of the application pages.  
 
-<img src="../images/PageMap.png" width="500">
+<img src="../images/PageMap.png">
 
 **If you find the page map is not loading run the following command in the root directory of the web application (i.e. caprisks/app/incidents) to add this as a dev dependency for your project to work**
 ```
@@ -66,20 +66,22 @@ npm i @sap/ux-specification --save-dev
 
 You can now see that the CAP server has discovered an HTML page in your ``app`` folder:
 
-<img src="../images/WelcomePageFioriApp.png" width="500">
+<img src="../images/WelcomePageFioriApp.png">
 
 ### 2. Choose the link [http://localhost:4004/incidents/webapp/index.html](http://localhost:4004/incidents/webapp/index.html) for the HTML page.
 
 ### 3. You can now see the application without any data
 
-<img src="../images/IncidentsAppEmpty.png" width="500">
+<img src="../images/IncidentsAppEmpty.png">
 
 There are no visible columns because the application is currently missing UI annotations. You add them in the next step
 
 ### 4. Add some annotations to change the UI.
 
 You'll find that the Fiori Elements Generator created a file called `annotations.cds` in the `app/incidents` folder. This is where the Page Map sticks annotations, and where you can 
-add your own by hand. Annotations can be a bit confusing so we suggest copying these as-is. 
+add your own by hand. You can use the Page Map to add columns, fields, sections etc to your list and object page and it's worth experimenting with this.
+
+Annotations can be a bit confusing though so if you're stuck, here are the annotations that our sample is using:
 
 ```js
 using IncidentsService as service from '../../srv/risk-service';
@@ -222,14 +224,18 @@ As in the steps before, the CAP server has noticed the new file and compiled the
 
 It now shows a work list with some columns and the data from the service.
 
-<img src="../images/IncidentsApp.png" width="500">
+<img src="../images/IncidentsApp.png">
 
 
 ## Part 3 - Add Business Logic to Your Application
 
-### 1. Create a file ``risk-service.js`` in the ``srv`` folder of your app
+### 1. Add a service implementation to place your hooks
 
-Copy the code below into the file you just created
+Every service has a series of hooks: `on`, `before` or `after` events such as `create` or `update`, in addition to implementing actions and functions. By default, the implementation 
+of this is a a javascript file name the same as your service. So, please create a file ``risk-service.js`` in the ``srv`` folder of your app. 
+
+Copy the code below into the file you just created. This bit of code is going to dynamically add the criticality of the incident based on the impact. 
+
 ```js
 
 /**
@@ -250,11 +256,11 @@ module.exports = async (srv) => {
 };
 ```
 
-In your browser, reload the page of the SAP Fiori elements app.
+In your browser, your Fiori Elements app will reload and reflect these changes. 
 
 It now shows our work list with the columns ``Priority`` and ``Impact`` with color and an icon, depending on the amount in Impact.
 
-<img src="../images/IncidentsAppComplete.png" width="500">
+<img src="../images/IncidentsAppComplete.png">
 
 ### Explanation
 Because your file is called ``risk-service.js`` and, therefore, has the same name as your application definition file ``risk-service.cds``, CAP automatically treats it as a handler file for the application defined in there. CAP exposes several events and you can easily write handlers like the above.
