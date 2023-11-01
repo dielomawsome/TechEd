@@ -91,13 +91,15 @@ annotate IncidentsService.Incidents with @(UI: {
     }
 
 }, ) {
+    //These are FIELD annotations, like the @title's above. In this case, we specify that type should be a selection field with 
+    // a dropdown list of values. The values are defined in the ValueList annotation below.
     type @title: 'Type' 
     @(Common : {
         Text            : type.name,
         TextArrangement : #TextOnly,
         ValueListWithFixedValues: true,
         ValueList       : {
-            Label          : '{i18n>criticality}',
+            Label          : '{i18n>Type}',
             CollectionPath : 'Type',
             Parameters     : [
                 {
@@ -109,6 +111,8 @@ annotate IncidentsService.Incidents with @(UI: {
             ]
         }
     });
+    //Some of these are weird and I'm not entirely sure when to use the actual field name vs the association or composition. 
+    //In this case it seemed to make a difference?
     type_code @title: 'Type' 
       @(Common : {
         Text            : type.name,
@@ -117,6 +121,8 @@ annotate IncidentsService.Incidents with @(UI: {
     });
 };
 
+//More Line item annotations. These are for the Mitigations service. This specifies the columns in the table for Mitigations
+//inside of the the Object page
 annotate IncidentsService.Mitigations with @(UI.LineItem #Mitigations: [
     {
         $Type: 'UI.DataField',
@@ -128,6 +134,8 @@ annotate IncidentsService.Mitigations with @(UI.LineItem #Mitigations: [
     },
 ]);
 
+
+//These annotations add a few titles to the fields in the Type service. 
 annotate IncidentsService.Type with {
     code @title: 'Type'
       @(Common : {
