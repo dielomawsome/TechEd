@@ -34,7 +34,7 @@ cd caprisks
 cds init
 ```
 
-<img src="../images/CDSInit.png" width="500">
+<img src="../images/CDSInit.png">
 
 
 ### For VSCode users
@@ -52,7 +52,7 @@ This installs all the dependencies for the project.  You can find these listed i
 ```bash
 npm install
 ```
-<img src="../images/npmInstall.png" width="500">
+<img src="../images/npmInstall.png">
 
 ### 6. In the VS Code terminal, start a CAP server.
 ```bash
@@ -62,7 +62,7 @@ The CAP server serves all the CAP sources from your project. It also “watches�
 
 The screen now looks like this:
 
-<img src="../images/CDSWatchEmpty.png" width="500">
+<img src="../images/CDSWatchEmpty.png">
 
 The CAP server tells you that there is no model and no service definitions yet that it can serve. You add some in the next step.
 
@@ -139,7 +139,7 @@ Each of the entities has a key called `ID` and several other properties. An ``In
 
 
 
-Notice how the CAP server reacted to dropping the file. It now tells you that it has a model but there are no service definitions yet and, thus, it still can’t serve anything. 
+Notice how the CAP server reacted to saving and creating the file. It now tells you that it has a model but there are no service definitions yet and, thus, it still can’t serve anything. The following will be at the bottom of the console output:
 
 ```
 No service definitions found in loaded models.
@@ -171,7 +171,7 @@ If you again look at the terminal, you see that the CAP server has noticed the n
 
 ### 3. In your browser open the link [http://localhost:4004](http://localhost:4004), or follow the BAS pop up
 
-<img src="../images/WelcomePage.png" width="500">
+<img src="../images/WelcomePage.png">
 
 ### 4. Choose the ``$metadata`` link.
 
@@ -206,7 +206,7 @@ There are example CSV files in the app provided in this repository if you're loo
 
 ### 6. Revisit the ``Incidents`` entity [http://localhost:4004/odata/v4/service/incident/Incidents](http://localhost:4004/odata/v4/service/incident/Incidents) in your browser. You now see the data exposed.
 
-<img src="../images/IncidentsService.png" width="500">
+<img src="../images/IncidentsService.png">
 
 When you revisit the ``Incidents`` entity, you might see something simlar but not this nicely-formatted JSON output above. This doesn’t mean you have made a mistake in the tutorial. Rather, this is just a formatted output.  There are various chrome/edge extensions to install that will do this for you. 
 

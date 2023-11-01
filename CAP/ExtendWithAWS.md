@@ -12,13 +12,90 @@ To extend Fiori Elements, we will use the Page Map in all examples going forward
 
 To add an extension to the body of a Fiori Elements app, choose the edit function on the Object Page and choose to add a new section
 
-<img src="../images/CustomSection.png" width="500">
+<img src="../images/CustomSection.png">
 
 From there, choose to add a new section with a new Fragment and a new implementation, following the Mitigations section. You can give it any name you like, we're calling ours `Files`, which results in
 
-<img src="../images/CustomFiles.png" width="500">
+<img src="../images/CustomFiles.png">
 
+There are two things to implement here. You'll see a fragment and a handler. 
 
+```xml
+<core:FragmentDefinition xmlns:w="sap.ui.webc.main" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:macros="sap.fe.macros">
+	<VBox>
+		<HBox>
+			<w:FileUploader placeholder="Upload file..." core:require="{ handler: 'ns/incidents/ext/fragment/Files'}" change="handler.handleChange"></w:FileUploader>
+			<Button
+				text="Upload File"
+				core:require="{ handler: 'ns/incidents/ext/fragment/Files'}"
+				press="handler.handleUploadPress" />
+		</HBox>
+		<List
+			id="list"
+			enableBusyIndicator="true"
+			headerText="List from AWS"
+			growing="true"
+			items="{
+				path: '/FileList()'
+			}">
+			<ObjectListItem
+				title="{Name}"
+				type="Active"
+				core:require="{ handler: 'ns/incidents/ext/fragment/Files'}"
+				press="handler.onListItemPress"
+				number="{= Math.round(${Size} / 1024) } KB" />
+		</List>
+	</VBox>
+</core:FragmentDefinition>
+```
+
+And we have our handler:
+
+```js
+/* eslint-disable no-undef */
+sap.ui.define(["sap/m/MessageToast"], function (MessageToast) {
+  "use strict";
+  let file;
+
+  const url = 'https://2jm9jcmsc5.execute-api.us-east-1.amazonaws.com/v2/appgyver-1'
+  return {
+    handleUploadPress: async function () {
+      if (file) {
+        try {
+          const headers = new Headers();
+          headers.append("Content-Type", file.type);
+          
+          const body = new FormData();
+          body.append("file", file, file.name);
+          body.append("name", file.name);
+          
+          await fetch(`${url}/${file.name}`, {
+            method: 'PUT',
+            headers,
+            body
+          });
+
+          this.byId('fe::CustomSubSection::Files--list').getBinding('items').refresh()
+          MessageToast.show("File uploaded successfully")
+        } catch(e) {
+          MessageToast.show("Error! File not uploaded");
+        }
+
+        file = null;
+      }
+    },
+    handleChange: function (oEvent) {
+      file = oEvent.getParameter("files")[0];
+    },
+
+    onListItemPress: function (oEvent) {
+      const { FileLocation } = oEvent.getSource().getBindingContext().getObject();
+      window.open(FileLocation, "_blank");
+    }
+  };
+});
+```
 
 ## 2. Use generative AI to find a solution
 
@@ -26,7 +103,7 @@ Bedrock is an AWS service that allows the developer to easily add a generative A
 
 ### Add a custom button to the Object Page
 
-<img src="../images/CustomAction.png" width="500">
+<img src="../images/CustomAction.png">
 
 When prompted, call it `FindSolution`. A new file will pop up in the `ext/controller` path of your app and it will implement the `onPress` method that you find on regular old buttons. This is the default:
 
@@ -51,22 +128,3 @@ In this case we're going to replace the `onPress` method with:
 ```
 
 ### Call Bedrock from the custom button
-
-
-From here, we're going to use this method to call an AWS service and display the results. 
-
-## 2. PDF's to an S3 bucket. 
-
-We're going to allow the user to upload PDF files to an AWS S3 bucket. To accomplish this, we will route reading and writing PDfs through our CAP application and displaying them in Fiori. 
-
-### List the available PDF's
-
-For this exesize we'll add a single Fragment to our Fiori UI to upload a document, and to display a list of available documents. To do this, we once again need the Page Map:
-
-<img src="../images/CustomFiles.png" width="500">
-
-### Create an upload function for a new PDF
-
-
-### Display the results
-
