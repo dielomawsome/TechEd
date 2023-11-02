@@ -20,7 +20,7 @@ These days trial accounts come with BAS pre-activated. If you can't find it To s
 
 ### Option 2: Local Visual Studio Code option
 
-Follow these instructions as required. To work with CAP locally, a few tools need to be installed. The SAP documentation has a good [Jumpstart devvelopment](https://cap.cloud.sap/docs/get-started/jumpstart) section. There's also is a handy [setup guide](/CAP/0.%20Setup.md) we wrote that is a bit more comprehensive on how to work with a terminal on windows or Mac. 
+Follow these instructions as required. To work with CAP locally, a few tools need to be installed. The SAP documentation has a good [Jumpstart development](https://cap.cloud.sap/docs/get-started/jumpstart) section. There's also is a handy [setup guide](/CAP/0.%20Setup.md) we wrote that is a bit more comprehensive on how to work with a terminal on windows or Mac. 
 
 ## About this repository
 
