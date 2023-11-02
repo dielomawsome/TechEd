@@ -2,7 +2,8 @@
 	xmlns:macros="sap.fe.macros">
 	<VBox>
 		<HBox>
-			<w:FileUploader placeholder="Upload file..." core:require="{ handler: 'ns/incidents/ext/fragment/Files'}" change="handler.handleChange"></w:FileUploader>
+			<w:FileUploader placeholder="Upload file..."
+				core:require="{ handler: 'ns/incidents/ext/fragment/Files'}" change="handler.handleChange"></w:FileUploader>
 			<Button
 				text="Upload File"
 				core:require="{ handler: 'ns/incidents/ext/fragment/Files'}"
