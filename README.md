@@ -42,3 +42,8 @@ Followed by
 3. [Setting up some services in AWS](./CAP/3.%20SetupAWS.md)
 4. [Extending our Fiori application to include the AWS API's](./CAP/4.%20ExtendWithAWS.md)
 
+If you decide to run our application, open up your terminal, navigate to `/CAP/caprisks/` and execute:
+```sh
+npm install 
+cds watch
+```

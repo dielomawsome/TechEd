@@ -3,3 +3,4 @@ CAP/caprisks/.vscode/launch.json
 CAP/caprisks/.vscode/extensions.json
 
 CAP/cors/*
+package-lock.json
