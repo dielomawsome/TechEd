@@ -8,6 +8,8 @@ service IncidentsService {
 
   entity Mitigations as projection on my.Mitigations;
 
+  //This is a custom type, which is necessary to return a list of files since we have no 
+  //Database entities we can refer to for this purpose
   type Item {
     Name          : String;
     LastModified  : String;
@@ -20,6 +22,7 @@ service IncidentsService {
     StorageClass  : String;
     FileLocation  : String;
   }
-
-  function FileList()              returns array of Item; // returns a list of files uing the AWS S3 bucket objects
+  
+  // returns a list of files uing the AWS S3 bucket objects
+  function FileList()              returns array of Item; 
 }
