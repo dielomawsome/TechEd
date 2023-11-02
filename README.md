@@ -2,11 +2,6 @@
 
 Welcome to the TechEd Watch-and-code! In this repository you'll find the application and the steps we'll be following for the Demo Jam!
 
-## Prerequisites
-In order to participate in this CodeJam, you will need a BTP account.
-If you have an account already, you can use that.
-Alternatively you can setup a Trial account following these steps: https://developers.sap.com/tutorials/hcp-create-trial-account.html
-
 ## Development Environment Setup
 
 We have two options for you to work on this CAP development. The first is setting up a a BTP Account and activating Business Application Studio, which comes with all the necessary tools you need out of the box. 
