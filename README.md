@@ -31,7 +31,7 @@ Based on: [The SAP CodeJam](https://github.com/SAP-samples/cap-service-integrati
 ## Pre-built content / git repository - Jorg
 
 ## Steps to follow - Jorg
-Follow Tutorial 1 to [Create a CAP-Based Application](/CAP/CreateApplication.md). The summary is below:
+Follow Tutorial 1 to [Create a CAP-Based Application](/CAP/1.%20CreateApplication.md). The summary is below:
 
 <details>
 
@@ -50,7 +50,7 @@ Follow Tutorial 1 to [Create a CAP-Based Application](/CAP/CreateApplication.md)
 
 </details>
 
-Follow Tutorial 2 to [Create a Fiori Elements Application](/CAP/CreateFioriElementsUI.md)
+Follow Tutorial 2 to [Create a Fiori Elements Application](/CAP/2.%20CreateFioriElementsUI.md)
 <details>
 
 1. Create a Fiori Elements application with the wizard of type List Report / Object Page
