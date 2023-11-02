@@ -1,4 +1,6 @@
-TechEd Watch-and-code CodeJam
+# TechEd Watch-and-code Meetup
+
+Welcome to the TechEd Watch-and-code! In this repository you'll find the application and the steps we'll be following for the Demo Jam!
 
 # Prerequisites
 In order to participate in this CodeJam, you will need a BTP account.
@@ -23,47 +25,20 @@ These days trial accounts come with BAS pre-activated. If you can't find it To s
 
 ## Option 2: Local Visual Studio Code option
 
-Follow these instructions as required. To work with CAP locally, a few tools need to be installed. The SAP documentation has a good [Jumpstart devvelopment](https://cap.cloud.sap/docs/get-started/jumpstart) section. There's also is a handy [setup guide](/CAP/Setup.md) we wrote that is a bit more comprehensive on how to work with a terminal on windows or Mac. 
+Follow these instructions as required. To work with CAP locally, a few tools need to be installed. The SAP documentation has a good [Jumpstart devvelopment](https://cap.cloud.sap/docs/get-started/jumpstart) section. There's also is a handy [setup guide](/CAP/0.%20Setup.md) we wrote that is a bit more comprehensive on how to work with a terminal on windows or Mac. 
 
-# SAP CodeJam Exercise
-Based on: [The SAP CodeJam](https://github.com/SAP-samples/cap-service-integration-codejam/tree/main/exercises/12-extend-fiori-ui-with-annotations)
+## About this repository
 
-## Pre-built content / git repository - Jorg
+Inside this repository you'll find a folder called `CAP`. In here is the sample app and the steps for the exercise. 
 
-## Steps to follow - Jorg
-Follow Tutorial 1 to [Create a CAP-Based Application](/CAP/CreateApplication.md). The summary is below:
+[`CAP/caprisks`](./CAP/caprisks/) is the CAP application you'll be replicating. 
 
-<details>
+The exersices themselves can be found in:
+1. [Creating a CAP application](./CAP/1.%20CreateApplication.md)
+2. [Creating a Fiori Elements Application](./CAP/2.%20CreateFioriElementsUI.md)
 
-1. Create an empty NodeJS application with `npm init`
-2. Initialise an empty CAP application with `cds init && npm install`
-3. Start your app in development mode with `cds watch`
-3. Add a schema file
-4. Add an entity for Incidents
-5. Add some mock data for your entity 
-6. Create a service cds file
-7. Create an IncidentsService and add a projection to your entity
-7. View your service and the metadata on your localhost
-8. Create your first annotation and enable draft functionality on your Incidents projection
-9. Add a *Composition* for comments and provide some sample data
-10. Add an *Association* for Incident type and provide some sample data
+Followed by 
 
-</details>
-
-Follow Tutorial 2 to [Create a Fiori Elements Application](/CAP/CreateFioriElementsUI.md)
-<details>
-
-1. Create a Fiori Elements application with the wizard of type List Report / Object Page
-2. Use the *Page map* to add some columns to the list report, and some fields to the object page
-3. Use the *Page map* to turn the Incident type field into a search help
-
-</details>
-
-# AWS Account Setup
-
-
-### Add button in SAP BTP App to call API - Shaun
-
-
-### Display results in SAP BTP App - Shaun
+3. [Setting up some services in AWS](./CAP/3.%20SetupAWS.md)
+4. [Extending our Fiori application to include the AWS API's](./CAP/4.%20ExtendWithAWS.md)
 
