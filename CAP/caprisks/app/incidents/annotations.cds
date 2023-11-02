@@ -111,14 +111,6 @@ annotate IncidentsService.Incidents with @(UI: {
             ]
         }
     });
-    //Some of these are weird and I'm not entirely sure when to use the actual field name vs the association or composition. 
-    //In this case it seemed to make a difference?
-    type_code @title: 'Type' 
-      @(Common : {
-        Text            : type.name,
-        TextArrangement : #TextOnly,
-        ValueListWithFixedValues: true,
-    });
 };
 
 //More Line item annotations. These are for the Mitigations service. This specifies the columns in the table for Mitigations
